@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body >
+    <script>
+async function login() {
+  fetch('http://localhost:8001/login', { method: 'POST', credentials: 'same-origin'  }).then(handleResponse)
+   };
+
+   self.onload= function () {
+   fetch('http://localhost:8001/lg', { method: 'POST', credentials: 'same-origin' })
+     .then(handleResponse)
+     .catch(function (err) {
+       console.log(err.message);
+     });
+ };
+
+async function handleResponse(response) {
+  return response.ok
+    ? response.json().then((data) => {if(data.result==='nOK'){ login()}})
+    : Promise.reject(new Error('Unexpected response'));
+}</script>
+</body>
+</html>
