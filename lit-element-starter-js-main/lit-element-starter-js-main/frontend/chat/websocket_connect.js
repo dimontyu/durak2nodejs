@@ -1,5 +1,5 @@
  export async function connekt(user) {
- let ws = new WebSocket(`ws://localhost:8765/5`);
+ let ws = new WebSocket(`ws://localhost:8001`);
  
  
  
@@ -21,7 +21,7 @@
 		
 		
     ws.send(JSON.stringify({
-        type:"connect-user","autorisation":data.name,token:data.token,password:data.password
+        type:"connect-user","username":data.name,token:data.token,password:data.password
     }));
 
 

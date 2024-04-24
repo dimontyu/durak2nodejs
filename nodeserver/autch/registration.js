@@ -2,7 +2,9 @@
 const User = require('../models/user');
 const bCrypt = require('bcrypt');
 const uuid = require('uuid');
-module.exports=async function(req,res) {
+
+module.exports = async function (req, res) {
+    if (!req.body) return res.sendStatus(400);
     let user_name = req.body.user;
     let user_password = req.body.password;
     let result = await User.findOne({ name: user_name });
@@ -16,9 +18,9 @@ module.exports=async function(req,res) {
         let join_key = uuid.v4()//will be needed later
         
         let hashed = createHash(user_password); 
-        let uzer = new User({ name: user_name, hash:hashed, token:join_key, frends_name:[], postmessage:[], email:'' })
+        let uzer = new User({ name: user_name, hash: hashed, token: join_key, frends_name: [], postmessage: [], email: '', session_id: req.session.userId })
         await uzer.save()
-        let message = { 'type': 'autorisation', 'token': join_key, 'index': user_ind, 'name': user_name }
+        let message = { 'type': 'autorisation', 'token': join_key, 'index': user_ind, 'name': user_name, session_id: req.session.userId }
  
         await res.send(message)
     }

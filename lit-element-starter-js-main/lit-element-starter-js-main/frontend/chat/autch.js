@@ -49,7 +49,7 @@ this.autch_message='hello world';
  ws;//порт/5
  ws1;//порты игры
 
-echo(me){let e=JSON.parse(me.data);//console.log(this.autch_message)
+echo(e){//let e=JSON.parse(me.data);//console.log(this.autch_message)
 //{"type": "autorisation", "token": "5chdRAe7ZUfSevp0"}
 if(e.type=="autorisation" && e.token){let l_i=localStorage.getItem(e.index)
 let x=JSON.parse(l_i);x.token=e.token;let y=JSON.stringify(x);
@@ -64,8 +64,11 @@ if(e.type=="susses" && !e.error){this.autch_message=`You are logged in as ${e.na
 if(e.type=="susses" && e.error){this.autch_message=` ${e.error}`;this.requestUpdate();}
 //console.log(this.autch_message)
  }
-async connect(){let user="btn-pw1"; this.ws= await connekt(user)
-this.ws.onmessage=this.echo; 
+async connect(){let user="btn-pw1";
+var xx=user?localStorage.getItem(`${user}`):undefined;
+var data=xx?JSON.parse(xx):undefined;
+var res={type:"connect-user","user":data.name,token:data.token,password:data.password}
+data?postData("POST","http://localhost:8001/init",res).then(this.echo(data)):null
 }
 
 
@@ -148,12 +151,13 @@ clickHandler_Chat(){(this.Chat===false)?this.Chat=true:this.Chat=false;};
  
  } }
  
- //установка аккаунтов
+ //установка аккаунтов autorisation
  
 account_install(e){
-if(this.target.token===undefined && this.ws){	 
+if(this.target.token===undefined){	 
 let data={type:"init-user",user:this.target.name,password:this.target.password,index:this.target.index}	 
-	 this.ws.send(JSON.stringify(data));
+	 //this.ws.send(JSON.stringify(data));
+postData("POST","http://localhost:8001/register",data).then(this.echo(data))
 }};
 //delete akount
  clearone(e){
@@ -222,7 +226,26 @@ let chat=!xor?html`<div class='mod' id="uux" @click=${this.clickHandler_Chat}>Th
  
  
 
- 
+async function postData(xx,url = '', data = {}) {
+
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: xx, // *GET, POST, PUT, DELETE, etc.
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        headers: {Origin:'*',
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+
+        body: JSON.stringify(data),
+      
+    })
+	return response.json();
+	 //let json=await response.json(); console.log('успех',json.h1); УБРАТЬ ОБЕ КОММЕНТИРОВАНИЕ ПОСЛЕ ТЕСТА!!!
+    
+       
+   
+} 
  
  
  

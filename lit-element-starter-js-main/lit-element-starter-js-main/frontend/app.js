@@ -1,7 +1,7 @@
 
-//import {BordCount} from"./chat/autch.js"
+import {BordCount} from"./chat/autch.js"
 import {DurakGame,state} from './games/main.js';
-//import {ws_player} from './chat/autch.js';
+import {ws_player} from './chat/autch.js';
 import {MotionLit} from './logo/motion-l.js';
 let ws;
 
@@ -14,7 +14,7 @@ let rendersock =async (response) => {
 	r.usernames];
 
 state.r=r;state.ws=ws;
-//ws_player.ws=ws;
+ws_player.ws=ws;
 customElements.define('doom-arhitekt',DurakGame);
 
 

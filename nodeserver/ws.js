@@ -8,9 +8,10 @@ const mongoose = require('mongoose');
 const {WebSocket, WebSocketServer } = require('ws');
 const autch = require('./autch/autch');
 const register = require('./autch/registration');
+const init = require('./autch/init');
 const connect=require('./connect');
 //import WebSocket, { WebSocketServer } from 'ws';
-
+const jsonParser = express.json();
 function onSocketError(err) {
   console.error(err);
 }
@@ -51,10 +52,11 @@ app.use(cors())
 
 app.use(express.static('public'));
 app.use(sessionParser);
-app.post('/login', function(req,res){ let n=map ; autch.login(req,res,n)});
+app.post('/login', cors(), function(req,res){ let n=map ; autch.login(req,res,n)});
 app.delete('/logout',function(req,res){let n=map ;  autch.logout(req,res,n)});
-app.post('/lg', function (req, res) { autch.loginGET(req, res) });
-app.post('/register', function (req, res) { register(req, res) });
+app.post('/lg', cors(), jsonParser, function (req, res) { autch.loginGET(req, res) });
+app.post('/register', cors(), jsonParser, function (req, res) { register(req, res) });
+app.post('/init', cors(), jsonParser, function (req, res) { init(req, res) });
 
 var dev_db_url =process.env.MONGODB_URI;
 var LmongoDB = 'mongodb://localhost:27017/durak';
@@ -107,5 +109,5 @@ wss.on('connection', function (ws,request) {connect.connect(WebSocket,wss,ws,map
 // Start the server.
 //
 server.listen(8001, function () {
-  console.log('Listening on http://localhost:8080');
+  console.log('Listening on http://localhost:8001');
 });
