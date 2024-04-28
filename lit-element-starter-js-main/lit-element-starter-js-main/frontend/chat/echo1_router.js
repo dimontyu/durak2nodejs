@@ -12,8 +12,8 @@ if(type==="chat"){
 	
 this._ChatItems.push(data);this.requestUpdate();
 
-}else
-this._ChatItems.push(m);this.requestUpdate();
+}//else
+//this._ChatItems.push(m);this.requestUpdate();
 
 
 

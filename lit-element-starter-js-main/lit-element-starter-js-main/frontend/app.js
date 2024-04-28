@@ -93,10 +93,10 @@ sent()
     id_prosses=null;
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
 
-    setTimeout(function() {
+  /*   setTimeout(function() {
 
       connect();
-    }, 1000);
+    }, 1000); */
   };
 
  ws.onerror= async function error(err) {
@@ -112,5 +112,5 @@ sent()
 }
 
 
-
+//window.addEventListener("message",function(e){console.log(e.data)})
 

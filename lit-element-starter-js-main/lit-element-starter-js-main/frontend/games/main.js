@@ -96,7 +96,7 @@ this._myrole=this._role[0];
 if(this.players_count===2 && e){this._role.reverse()}
 //console.log(this.usernames)
 let data=JSON.stringify({"install":true,users:this.deck_id,user:this.id,usernames:this.usernames})
-window.postMessage(data );
+window.postMessage(data,origin );
 
 this.b_ack= html`<img src=./img/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0][1]}.png alt="Card back" class="card_img" style="opacity: 0.5;" />`
 //console.log(this._role)

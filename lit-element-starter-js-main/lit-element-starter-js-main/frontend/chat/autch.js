@@ -30,10 +30,11 @@ this.hideCompleted=false;
 this._listItems=this.action;
 this._ChatItems=[1];
 this.Chat=false;
-window.addEventListener("message",(event)=>this.ws_plinstall.call(this,event))//если вкл игру отключить порт/5
+window.addEventListener("message",(event)=>{console.log('LOGIN'),this.ws_plinstall.call(this,event)})
 
 this.connect();
 this.echo=this.echo.bind(this);
+this.ws_plinstall=this.ws_plinstall.bind(this)
 this.echo1=this.echo1.bind(this);
 this.input_msg=this.input_msg.bind(this);
 this.send_msg=this.send_msg.bind(this);
@@ -47,56 +48,56 @@ this.autch_message='hello world';
  _input_msg=""; 
  ackount={name:undefined,password:undefined,index:undefined,token:undefined};  
  ws;//порт/5
- ws1;//порты игры
+ ws1=ws_player?.ws;//порты игры
 
-echo(e){//let e=JSON.parse(me.data);//console.log(this.autch_message)
-//{"type": "autorisation", "token": "5chdRAe7ZUfSevp0"}
+echo(e){
+console.log(e)
+
 if(e.type=="autorisation" && e.token){let l_i=localStorage.getItem(e.index)
 let x=JSON.parse(l_i);x.token=e.token;let y=JSON.stringify(x);
 console.log(e.index)
 console.log(x)
-//localStorage.removeItem(e.index)
+
 localStorage.setItem(e.index,y);
 this.autch_message=`you registered as ${e.name}`;
 this.requestUpdate();	
 }
 if(e.type=="susses" && !e.error){this.autch_message=`You are logged in as ${e.name}`;this.requestUpdate();}
 if(e.type=="susses" && e.error){this.autch_message=` ${e.error}`;this.requestUpdate();}
-//console.log(this.autch_message)
+
  }
-async connect(){let user="btn-pw1";
+async connect(){
+	
+	let user="btn-pw1";
 var xx=user?localStorage.getItem(`${user}`):undefined;
 var data=xx?JSON.parse(xx):undefined;
-var res={type:"connect-user","user":data.name,token:data.token,password:data.password}
-data?postData("POST","http://localhost:8001/init",res).then(this.echo(data)):null
+var res=JSON.stringify({type:"connect-user","name":data.name,token:data.token,password:data.password})
+data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},4000):null;
+
 }
 
 
  
 target_user(event){this._User_chat_active=event.target.dataset.user;console.log(this._User_chat_active);}
 
- echo1(e){/* console.log(e.data) */;//this._ChatItems.push(JSON.parse(e.data));this.requestUpdate();
+ echo1(e){
  router_echo1.call(this,e)
  }
   
 
 
-async ws_plinstall(ev){
-this.ws1=ws_player.ws ;this.ws1.addEventListener("message",this.echo1);
-if(this.ws !==undefined){this.ws.close();}	
+async ws_plinstall(ev){console.log(ev.data)
+this.ws1=ws_player?.ws??null;this.ws1?this.ws1.addEventListener("message",this.echo1):null;
+
 	
-if(ev){let e=JSON.parse(ev.data);if(e.install===true && this._listItems[0]){
+if(ev){let e=!(ev.data.result)?JSON.parse(ev.data):null;
+if(e?.install===true && this._listItems[0]){
+
 let u_s=e.users.map((i)=>{if(i!==e.id) return i})
 	
 this._UserNames=e.usernames;	
 this._Users=u_s;
-this._User=e.user;	
-//console.log(this._User)
-//console.log(this._UserNames)	
-//let n=this._listItems[0];	
-//let init=JSON.stringify({type:"init",name:n.name});	
-//console.log(this._listItems)	
-//this.ws1.send(init)	
+this._User=e.user;		
 }};
  }  
   
