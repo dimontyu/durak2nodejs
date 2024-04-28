@@ -4,6 +4,7 @@ const bCrypt = require('bcrypt');
 const uuid = require('uuid');
 
 module.exports = async function (req, res) {
+    console.log(req.session.userId)
     if (!req.body) return res.sendStatus(400);
     let user_name = req.body.user;
     let user_password = req.body.password;
@@ -18,7 +19,7 @@ module.exports = async function (req, res) {
         let join_key = uuid.v4()//will be needed later
         
         let hashed = createHash(user_password); 
-        let uzer = new User({ name: user_name, hash: hashed, token: join_key, frends_name: [], postmessage: [], email: '', session_id: req.session.userId })
+        let uzer = new User({ name: user_name, hash: hashed, token: join_key, frends_name: [], postmessage: [], email: '', session_id:'none' })
         await uzer.save()
         let message = { 'type': 'autorisation', 'token': join_key, 'index': user_ind, 'name': user_name, session_id: req.session.userId }
  

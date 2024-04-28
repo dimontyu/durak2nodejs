@@ -17,12 +17,12 @@ ChatGame(wss,ws,WebSocket,userId,MSG);
   break;
   case 'set':
    Game_game(MSG,map);
-    // Expected output: "Mangoes and papayas are $2.79 a pound."
+    
     break;
   case 'hi':
   let msg=JSON.stringify({"id":userId,connect:"connect"});
    ws.send(msg.toString());
-    // Expected output: "Mangoes and papayas are $2.79 a pound."
+    
     break;
   default:
 console.log(`Sorry, we are out of ${type}.`);

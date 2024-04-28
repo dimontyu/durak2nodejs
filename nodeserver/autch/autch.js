@@ -2,15 +2,15 @@
 
 
 const uuid = require('uuid');
-exports.login= function(req,res,map) {
-  //
-  // "Log in" user and set userId to session.
-  //
+const init = require('./init');
+exports.login=async function(req,res,map) {
+    console.log(req.body.name)
   const id = uuid.v4();
 
   console.log(`Updating session for user ${id}`);
-  req.session.userId = id;
-  res.send({ result: 'OK', message: 'Session updated' });
+    req.session.userId = id;
+ let msg=await init(req,res,id)
+  res.send(JSON.stringify(msg));
 };
 
 exports.logout=function(request,response,map) {

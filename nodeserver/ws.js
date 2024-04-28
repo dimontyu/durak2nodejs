@@ -52,7 +52,7 @@ app.use(cors())
 
 app.use(express.static('public'));
 app.use(sessionParser);
-app.post('/login', cors(), function(req,res){ let n=map ; autch.login(req,res,n)});
+app.post('/login', cors(), jsonParser, function(req,res){ let n=map ; autch.login(req,res,n)});
 app.delete('/logout',function(req,res){let n=map ;  autch.logout(req,res,n)});
 app.post('/lg', cors(), jsonParser, function (req, res) { autch.loginGET(req, res) });
 app.post('/register', cors(), jsonParser, function (req, res) { register(req, res) });

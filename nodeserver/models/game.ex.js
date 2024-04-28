@@ -22,7 +22,8 @@ var Schema = mongoose.Schema;
         name:String,
         cach:[[],[],[],[]],
         deck_back:Array,
-        passes:Number,
+     passes: Number,
+     usernames:[]
 		},{ versionKey: false })
 		
 		
