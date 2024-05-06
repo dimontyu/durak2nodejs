@@ -66,14 +66,16 @@ if(e.type=="susses" && !e.error){this.autch_message=`You are logged in as ${e.na
 if(e.type=="susses" && e.error){this.autch_message=` ${e.error}`;this.requestUpdate();}
 
  }
-async connect(){
-	
-	let user="btn-pw1";
-var xx=user?localStorage.getItem(`${user}`):undefined;
+/*  2 Вызов */
+async connect(){	
+	let user="btn-pw1";let User=localStorage.getItem(`${user}`)
+	let nouser='no-autch';let Nouser=localStorage.getItem(`${nouser}`)
+if(User||Nouser){	
+var xx=User?localStorage.getItem(`${user}`):localStorage.getItem(`${nouser}`);
 var data=xx?JSON.parse(xx):undefined;
 var res=JSON.stringify({type:"connect-user","name":data.name,token:data.token,password:data.password})
-data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},4000):null;
-
+data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
+}if(!User&&!Nouser){let nackount=JSON.stringify({type:"connect-user",name:'GamerX',password:'000',token:"1S2ec3r4e5T"});localStorage.setItem('no-autch',nackount);window.setTimeout(()=>{frames.autch.postMessage(nackount,'*')},500)}
 }
 
 
@@ -84,13 +86,22 @@ target_user(event){this._User_chat_active=event.target.dataset.user;console.log(
  router_echo1.call(this,e)
  }
   
+pre(e){if( e.token){
+let l_i=localStorage.getItem('btn-pw1')
+let l_j=localStorage.getItem('no-autch')
+	
+let x=JSON.parse(l_i??l_j);x.token=e.token;let y=JSON.stringify(x);
 
+//console.log(x)
+
+l_i?localStorage.setItem('btn-pw1',y):localStorage.setItem('no-autch',y);}
+};
 
 async ws_plinstall(ev){console.log(ev.data)
 this.ws1=ws_player?.ws??null;this.ws1?this.ws1.addEventListener("message",this.echo1):null;
 
 	
-if(ev){let e=!(ev.data.result)?JSON.parse(ev.data):null;
+if(ev){let e=!(ev.data.result)?JSON.parse(ev.data):this.pre(ev.data);
 if(e?.install===true && this._listItems[0]){
 
 let u_s=e.users.map((i)=>{if(i!==e.id) return i})
@@ -101,12 +112,13 @@ this._User=e.user;
 }};
  }  
   
-  
-get action(){let arr=[];  for(let i=1;i<=3;i++){
+/*  Первый вызов  */
+get action(){let arr=[]; var yy=localStorage.getItem('no-autch'); for(let i=1;i<=3;i++){
 	
 	var xx=localStorage.getItem('btn-pw'+i);
+if(i===1 && !xx){yy?xx=yy:null}	
 	
-	var x=arr.push(JSON.parse(xx));
+	var x=xx?arr.push(JSON.parse(xx)):arr.push(null);
 }return arr;};
 
 get target(){return this.ackount};

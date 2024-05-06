@@ -135,7 +135,7 @@ async function pop_dek(nn6, game, ie) {
                 
     else if ((nn6 >game.deck.length) && (game.deck.length !== 0)) {
 
-        await popdek(game.deck, game.players[ie], len(game.deck))
+        await popdek(game.deck, game.players[ie], game.deck.length)
         return 0;
     }
    

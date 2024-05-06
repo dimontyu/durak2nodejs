@@ -15,7 +15,7 @@ var UserSchema =new Schema({
 hash: String,
 	token: String,
   session_id:String,
-username: String,
+//username: String,
 name: String,	   
 email: String ,
 firstName: String,

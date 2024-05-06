@@ -11,7 +11,8 @@ console.log(path)
 
 switch (type) {
   case 'chat':
-ChatGame(wss,ws,WebSocket,userId,MSG);
+		//ChatGame(wss, ws, WebSocket, userId, MSG);
+		ChatGame(wss,map, ws, WebSocket, userId, MSG);
     break;
   case 'start':Game?.size>=path?Game_mongo(userId,map,Game,path):null;
   break;
