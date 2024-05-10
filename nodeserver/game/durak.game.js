@@ -38,7 +38,7 @@ let game=await Durak.findOne({name:msg?.name})
          game.passes=ps;
 const result = await Durak.updateOne({name:msg?.name}, {players:game.players,cach:game.cach,passes:game.passes})
 
-game.deck_id.forEach((client)=>{map.get(client).send(JSON.stringify(msg).toString())})	   
+    game.deck_id.forEach((client) => { map.has(client)?map.get(client).send(JSON.stringify(msg).toString()):null})	   
 	   
  
 
@@ -65,7 +65,7 @@ async function defender_main(t,ui,map,msg){
  const result = await Durak.updateOne({name:msg?.name},{players:game.players,cach:game.cach,passes:0,deck: game.deck}, { new: true });
     let gam_n = game; console.log(result);          
 let response=JSON.stringify({'type':'round-taks','deck':gam_n.deck,'players':gam_n.players,'roles':gam_n.roles,'cach':gam_n.cach,'deck_back':gam_n.deck_back,'deck_id':gam_n.deck_id,'bito':false});			
-gam_n.deck_id.forEach((client)=>{map.get(client).send(response.toString())})			
+    gam_n.deck_id.forEach((client) => { map.has(client)?map.get(client).send(response.toString()):null})			
 
 }
 async function attaker_main(t, u, map, msg) {
@@ -89,7 +89,7 @@ async function attaker_main(t, u, map, msg) {
         players: game.players, cach: game.cach, passes: 0,
         deck: game.deck, deck_back: game.deck_back}, { new: true }); let gam_n = game; console.log(result)
     let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito':true });
-    gam_n.deck_id.forEach((client) => { map.get(client).send(response.toString()) })
+    gam_n.deck_id.forEach((client) => { map.has(client) ?map.get(client).send(response.toString()):null })
 }
 
 async function sortdek(gm){

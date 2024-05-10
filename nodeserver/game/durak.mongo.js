@@ -29,7 +29,7 @@ module.exports = async function (userId, map, Game, path) {
 
 
 	}
-
+	jjj = null;
 
 };
 		

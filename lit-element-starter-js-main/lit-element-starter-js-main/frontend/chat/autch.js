@@ -3,7 +3,7 @@
  import {LitElement,html,css} from 'lit';
 import {render_modalOne,render_modalTwo} from './renders.js';
 import {render_modalThree} from './chat_render.js';
-import{connekt} from './websocket_connect.js';
+//import{connekt} from './websocket_connect.js';
 import{router_echo1} from './echo1_router.js'
 export const ws_player={};
  
@@ -27,12 +27,12 @@ export class BordCount extends LitElement {
 	  super()
 	this.akkountVar=false;
 this.hideCompleted=false;	
-this._listItems=this.action;
+this._listItems=this.action;/*  Первый вызов  */
 this._ChatItems=[1];
 this.Chat=false;
 window.addEventListener("message",(event)=>{console.log('LOGIN'),this.ws_plinstall.call(this,event)})
 
-this.connect();
+this.connect();/*  2 вызов  */
 this.echo=this.echo.bind(this);
 this.ws_plinstall=this.ws_plinstall.bind(this)
 this.echo1=this.echo1.bind(this);
@@ -185,13 +185,14 @@ this._listItems[k]=null;        return this.clickHandler()
  }
 }; 
  
- 
- input_msg(e){this._input_msg =e.target.value;console.log(this._input_msg)}
+ //send_msg
+ input_msg(e){this._input_msg =e.target.value;console.log(this._input_msg)};
  send_msg(){let msg={type:"chat",name:this._listItems[0]?.name,id:this._User_chat_active,message:this._input_msg};
  console.log(this._User_chat_active)
  if(this.ws1){
  this.ws1.send(JSON.stringify(msg));}
  this._input_msg='';
+this.shadowRoot.querySelector('.form-control').value='';
  }
  
   //главный рендер компонента
