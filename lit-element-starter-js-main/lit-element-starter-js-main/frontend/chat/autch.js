@@ -36,8 +36,6 @@ this.connect();/*  2 вызов  */
 this.echo=this.echo.bind(this);
 this.ws_plinstall=this.ws_plinstall.bind(this)
 this.echo1=this.echo1.bind(this);
-this.input_msg=this.input_msg.bind(this);
-this.send_msg=this.send_msg.bind(this);
 this._Users=[1,2,3];
 this._User="User";
 this._User_chat_active=""
@@ -80,7 +78,6 @@ data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
 
 
  
-target_user(event){this._User_chat_active=event.target.dataset.user;console.log(this._User_chat_active);}
 
  echo1(e){
  router_echo1.call(this,e)
@@ -142,59 +139,6 @@ clickHandler_Chat(){(this.Chat===false)?this.Chat=true:this.Chat=false;};
  
 
   
- in_pwd(e){
-  
- 
-   
-  this.ackount.password=e.target.value;
-  };
- 
- in_user(e){
-  
- 
-   
-  this.ackount.name=e.target.value;
-  };
-  
-  
- 
- ch(){let t=this._listItems;   if(this.ackount.name){for(let item=0; item<=t.length-1;item++){if(t[item]===null){this.ackount.index='btn-pw'+(item+1);   t[item]= this.ackount; return this.Storage}  }
-	 
- //this._listItems
- 
- } }
- 
- //установка аккаунтов autorisation
- 
-account_install(e){
-if(this.target.token===undefined){	 
-let data={type:"init-user",user:this.target.name,password:this.target.password,index:this.target.index}	 
-	 //this.ws.send(JSON.stringify(data));
-postData("POST","http://localhost:8001/register",data).then(this.echo(data))
-}};
-//delete akount
- clearone(e){
-	 
-	 console.log(this.target.token)
-if(this.target.token && this.ws){	 
-let data={type:"uninstall-user",user:this.target.name,token:this.target.token}	 
-	 this.ws.send(JSON.stringify(data));	 
-let cw=this.target.index;
-localStorage.removeItem(cw);let k=this._listItems.findIndex(i=> i?.index===cw);console.log(k)
-this._listItems[k]=null;        return this.clickHandler() 
- }
-}; 
- 
- //send_msg
- input_msg(e){this._input_msg =e.target.value;console.log(this._input_msg)};
- send_msg(){let msg={type:"chat",name:this._listItems[0]?.name,id:this._User_chat_active,message:this._input_msg};
- console.log(this._User_chat_active)
- if(this.ws1){
- this.ws1.send(JSON.stringify(msg));}
- this._input_msg='';
-this.shadowRoot.querySelector('.form-control').value='';
- }
- 
   //главный рендер компонента
    render(){ 
 const modalThree=render_modalThree.call(this);//блок чата

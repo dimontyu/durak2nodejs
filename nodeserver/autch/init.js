@@ -25,6 +25,7 @@ module.exports = async function (req, res, userId) {
         // await res.send(message)
         return message
     }
+    //use anonimus
     if (!user) {
         let user_password = req.body.password;
         let hashed = createHash(user_password); 
