@@ -40,7 +40,7 @@ return s };
 		  
 
  
- export function img_render(e,i,p){
+ export function Img_render(e,i,p){
 if(e.id===this.id){return}
 if(i===this._pos0){return}
 if(e.type==='round-taks'){return}

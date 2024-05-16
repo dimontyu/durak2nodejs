@@ -1,10 +1,15 @@
 import {repeat} from 'lit/directives/repeat.js';
-
-
-
+import {images_render as Img} from './images_render.js';
+import {positing as po}from './positing.js';
+import {Prerender}from './prerender.js';
+import {render_right as Right} from './render_right.js';
+import {render_left as Left} from './render_left.js';
 
 
 export function Render(html,styleMap){
+//images_render.bind(this);		
+//Img.bind(this);	
+	
  let items = [
       {id: 0, name: 'J'},
       {id: 1, name: 'S'},
@@ -45,15 +50,15 @@ function span_atr(x){let a=(x==="attacker")?span_1:(x==="defender")?span_2:null;
  
 let span_0=html`<span @click=${this.taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
 
-let[p_p,rb]=this._echo?.type&&!eho?this.prerender():[null,null];//PRERENDER	
+let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,po):[null,null];//PRERENDER	
 let n=this.players_count;	
-let Left=(n>=3)?this.Img(this._pos2,'l'):null;
+let LEFT=(n>=3)?Img.call(this,this._pos2,'l'):null;
 
-let Right=(n===4)?this.Img(this._pos3,'r'):null;
+let RIGHT=(n===4)?Img.call(this,this._pos3,'r'):null;
 
-let Header=this.Img(this._pos1,'0');
+let Header=Img.call(this,this._pos1,'0');
 
-let Footer=a||eho?this.Img(this._pos0):this.foo;//сохранить чтобы не рендерить себя до конца раунда
+let Footer=a||eho?Img.call(this,this._pos0):this.foo;//сохранить чтобы не рендерить себя до конца раунда
 
 a||eho?this.foo=Footer:null;
 
@@ -61,8 +66,8 @@ let section=this.renderDeck();
 let b_ack=this.b_ack;//когда кончиться колода отобразить козыря
 
 const body= html`<div class=super>
-${n>=3?this.Left(Left,span_atr(this._role[2]),span_u2):null}
- ${n===4?this.Right(Right,span_atr(this._role[3]),span_u3):null}
+${n>=3?Left.call(this,LEFT,span_atr(this._role[2]),span_u2):null}
+ ${n===4?Right.call(this,RIGHT,span_atr(this._role[3]),span_u3):null}
  
 <div class="field">
 <header  class="header">

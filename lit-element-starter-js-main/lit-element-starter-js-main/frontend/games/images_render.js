@@ -1,12 +1,19 @@
 import {html} from 'lit';
 import {suitsMapping2}from './static.js';
+import {Defclick}from './defclick.js';
+import {Imgclick}from './imgclick.js';
+import {Img_render} from './img_render.js';
 
-export function images_render(i,p){let e=this._echo;
+export function images_render(i,p){
+Defclick.bind(this);
+Imgclick.bind(this);	
+let e=this._echo;
+
 
 if((e?.type==="set")&&(e?.id!==this.id)&&(i !==this.target)){
 
 	
-	return this.echorender(e,i,p)}
+	return Img_render.call(this,e,i,p)}
 else{
 	
 	
@@ -21,7 +28,7 @@ let img=target?pl[n].map((x,i)=>{
 let [symbol, rank] = [x[0],x[1]];
 let suit = suitsMapping2[symbol];
 let im=`./img/${suit}${rank}.png`; 
-return html`<img @click=${nn?this.imgclick:this.defclick} class="card_img cards_number-6 cards_number-6-hover r"  data-play="${n}" data-pos="${i}" src =${im}>`})
+return html`<img @click=${nn?Imgclick:Defclick} class="card_img cards_number-6 cards_number-6-hover r"  data-play="${n}" data-pos="${i}" src =${im}>`})
   :pl[i].map((x,i)=>{return html`<img class="card_img cards_number-6" src="./img/card-back.png">`})
 
 

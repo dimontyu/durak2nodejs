@@ -1,22 +1,11 @@
 import {LitElement, html,css} from 'lit';
-//import {classMap} from 'lit/directives/class-map.js';
 import {styleMap} from 'lit/directives/style-map.js';
-//import {animate ,flyBelow, fade,none} from '@lit-labs/motion';
 import {vebcss} from '../css/vebcss.js';
-import {img_render} from './img_render.js';
-import {images_render} from './images_render.js';
 import {render_deck} from './render_deck.js';
-import {render_right} from './render_right.js';
-import {render_left} from './render_left.js';
 import {suitsMapping2,A,passesMapping}from './static.js';
 import {Konduktor}from './konduktor.js';
 import {Rout}from './rout.js';
-import {Prerender}from './prerender.js';
 import {Render}from './body_render.js';
-import {positing as po}from './positing.js';
-
-//import {Render2}from './test.render.js';
-//import {vebcss4} from '../css/vebcss4.js';
 export const state={};
 
 export class DurakGame extends LitElement{
@@ -37,7 +26,6 @@ export class DurakGame extends LitElement{
 //static styles =vebcss4;	  
    constructor(){
         super()
-        
         this.name=state.r.name;//id gemes
         this.ws=state.ws;//Websockets()
         this.players_count = state.r.players_count;
@@ -54,11 +42,9 @@ export class DurakGame extends LitElement{
         this.deck_id =state.r.deck_id;
 		this.static_role=state.r.pl_roles;
 		this.usernames=state.r.usernames;
-        this.imgclick=this.imgclick.bind(this);
         this.echo=this.echo.bind(this);
         this.taks=this.taks.bind(this);
         this.Rout=this.Rout.bind(this);
-        this.defclick=this.defclick.bind(this);
         this.cash=[[],[],[],[]];//карты в игре
         this.ws.onmessage=this.echo; //обработчик сообщений сервера 
 	    this._role=[];
@@ -162,57 +148,6 @@ if ((result.includes('back'))){return true;}//если все Ок промис 
 else {return false};
 }//если нет карта не двигаетья 
 
-/* firstUpdated() { //lit method firstUpdated()
- this.initus();	
-} */
-
-
-//событие карта на столе
-//обработчик клика attacker attacker2 images_render.js
-async imgclick(e){
-
-let pss=this.passes;	
-let xx=(this._myrole==='attacker2' && !this.new_count)	
-if( e.target .style.top ==='-256px')return
-if(xx&& pss===0 )return
-e.preventDefault
-//Av.push(e.target);
-
-
-let d= e.target.dataset;
-let  j=Number(d.play) 
-let k=Number(d.pos)
-//console.log(e)
-
-let task=this.task(j,k)
-if (await task===true){
-	this.passes+=1;
-   //this.passes?passesMapping[this.passes](e.target):'';
-   e.target .style.left= po[this.passes-1].left;
-   e.target .style.top = po[this.passes-1].top;
-   e.target.classList.remove(`cards_number-${6}-hover`);
-   e.target.style.transform = 'none';
-   e.target.style.zIndex = -1;
-   //let ypy= e.target.getBoundingClientRect();
-   //console.log(ypy)
-   let u=this.players[j][k];
-//let lft=e.target.style.left;
-let lft=po[this.passes-1].left;
-
-this.konduktor.attach(u,lft);
-this._a.push(u);  
-
-this.cash[j].push(this.players[j][k]);
-//console.log(this.cash[j])
- 
-this.players[j].splice(k,1,null)
- 
- 
-
-   this.w_m={type:"set","players":d.play,"pos":d.pos,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"passes":this.passes,"roles":this._role};//отправка рендера всем
-}
-
-}
 
 taks(){let a_cards=this.konduktor.get_aktive().length===0;
 let passes=this.passes!==0;
@@ -247,43 +182,6 @@ async echo(e){ let message=JSON.parse(e.data) ;
 (message.type==="round-taks")?this.Rout(message):null;
 }
 
-//обработчик клика defender images_render.js
-async defclick(e){if( e.target .style.top ==='-256px')return
-e.preventDefault
-
-let d= e.target.dataset;
-let  j=Number(d.play) 
-let k=Number(d.pos)
-
-
-let task=this.task(j,k)
-if (await task===true){//если карту покрыл
-
-let broken_card=this.konduktor.broken_card();
-
-   this.passes?passesMapping[this.passes](e.target):'';
-   e.target .style.top = '-256px';
-   e.target.classList.remove(`cards_number-${6}-hover`);
-   e.target.style.transform = 'none';
- let wm3=this.konduktor.get_wm3(); 
-let wm4=this.konduktor.get_wm4();
-let pos_number=(this._pos2===Number(this._echo.players))||(this._pos3===Number(this._echo.players)); 
-   e.target.style.left=(pos_number&&wm4.has(broken_card))?wm4.get(broken_card):wm3.get(broken_card);
-   
-   //console.log(`wm4.get(broken_card:${wm4.get(broken_card)}`)
-   //console.log(this._pos2===Number(this._echo.players))
-   
-this.konduktor.deff()  
-   
-  this.cash[j].push(this.players[j][k]);
-  
-  this.players[j].splice(k,1,null)
- 
-
-   this.w_m={type:"set","players":d.play,"pos":d.pos,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"passes":this.passes,broken_card:broken_card,"roles":this._role};//отправка рендера всем
-}
-   
-}
 
 //вычисляем индех чтобы позиция юзера игры всегда находилась внизу
 index(){
@@ -299,11 +197,6 @@ return s;
 }
 
 
-
-Left(left,sp,span_u2){return render_left.call(this,left,sp,span_u2)};//render left deck
-
-Right(right,sp,span_u3){return render_right.call(this,right,sp,span_u3)};//render right deck
-
 renderDeck(){return render_deck.call(this,null)};//render deck deck
 
 
@@ -311,21 +204,6 @@ my_img;//сохранить чтобы не рендерить себя до к�
 set foo(foo){this.my_img=foo;};
 get foo(){return this.my_img;}
     
-
-
-
- Img(i,p){
-return images_render.call(this,i,p);	 
-	 
-}
-
- echorender(e,i,p){ 
-	return img_render.call(this,e,i,p);
-	
-};
-
-
-prerender(){return Prerender.call(this,po) } //настраиваем данные перед рендером
 
 // рендер for Render
  render(round){
@@ -335,20 +213,6 @@ prerender(){return Prerender.call(this,po) } //настраиваем данны
 
 
 
-/* initus(){ this.shadowRoot?.querySelectorAll('.g_g').forEach((i,index)=>{let domrect= i.getBoundingClientRect();
- [this.items[index].bottom,this.items[index].left,this.items[index].right,this.items[index].top]=
- [domrect.bottom+'px',domrect.left+'px',domrect.right+'px',domrect.top+'px']  }) ;console.log(this.items) }
-items = [
-      {id: 0, name: 'J',bottom:0,left:0,right:0,top:0},
-      {id: 1, name: 'S',bottom:0,left:0,right:0,top:0},
-      {id: 2, name: 'K',bottom:0,left:0,right:0,top:0},
-      {id: 3, name: 'R',bottom:0,left:0,right:0,top:0},
-      {id: 4, name: 'L',bottom:0,left:0,right:0,top:0},
-      {id: 5, name: 'P',bottom:0,left:0,right:0,top:0},
-	  {id: 6, name: 'y',bottom:0,left:0,right:0,top:0},
-	  {id: 7, name: 'x',bottom:0,left:0,right:0,top:0},
-    ];
-	*/
 
 };
 
