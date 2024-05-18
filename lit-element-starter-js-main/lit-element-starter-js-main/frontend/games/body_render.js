@@ -51,9 +51,9 @@ let span_0=html`<span @click=${Taks} class="mod" style="bottom:32px;left: 104%;p
 
 let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,po):[null,null];//PRERENDER	
 let n=this.players_count;	
-let LEFT=(n>=3)?Img.call(this,this._pos2,'l',html):null;
+let LEFT=(n>=3)?Img.call(this,this._pos2,'l'):null;
 
-let RIGHT=(n===4)?Img.call(this,this._pos3,'r',html):null;
+let RIGHT=(n===4)?Img.call(this,this._pos3,'r'):null;
 
 let Header=Img.call(this,this._pos1,'0');
 

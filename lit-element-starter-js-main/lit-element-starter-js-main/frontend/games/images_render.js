@@ -1,10 +1,10 @@
-//import {html} from 'lit';
+import {html} from 'lit';
 import {suitsMapping2}from './static.js';
 import {Defclick}from './defclick.js';
 import {Imgclick}from './imgclick.js';
 import {Img_render} from './img_render.js';
 
-export function images_render(i,p,html){
+export function images_render(i,p){
 Defclick.bind(this);
 Imgclick.bind(this);	
 let e=this._echo;
@@ -13,7 +13,7 @@ let e=this._echo;
 if((e?.type==="set")&&(e?.id!==this.id)&&(i !==this.target)){
 
 	
-	return Img_render.call(this,e,i,p,html)}
+	return Img_render.call(this,e,i,p)}
 else{
 	
 	

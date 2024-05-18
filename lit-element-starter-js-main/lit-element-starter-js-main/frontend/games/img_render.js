@@ -1,6 +1,6 @@
 import {animate ,flyBelow, fade,none} from '@lit-labs/motion';
 import {styleMap} from 'lit/directives/style-map.js'; 
-//import { html} from 'lit';
+import { html} from 'lit';
 import {suitsMapping2,A,passesMapping}from './static.js';
 import {positing}from './positing.js';
  const a = '-250';
@@ -40,7 +40,7 @@ return s };
 		  
 
  
- export function Img_render(e,i,p,html){
+ export function Img_render(e,i,p){
 if(e.id===this.id){return}
 if(i===this._pos0){return}
 if(e.type==='round-taks'){return}
