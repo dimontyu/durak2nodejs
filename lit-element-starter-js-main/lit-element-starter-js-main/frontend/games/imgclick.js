@@ -15,8 +15,8 @@ let  j=Number(d.play)
 let k=Number(d.pos)
 //console.log(e)
 
-let task=this.task(j,k)
-if (await task===true){
+let task= await matrix_attacker.call(this,j,k);
+if (task===true){
 	this.passes+=1;
    //this.passes?passesMapping[this.passes](e.target):'';
    e.target .style.left= po[this.passes-1].left;
@@ -44,3 +44,16 @@ this.players[j].splice(k,1,null)
 }
 
 }
+
+async function matrix_attacker(j,k){
+let a_cards=this.konduktor.get_aktive();
+let b_cards=this.konduktor.get_back().map((i)=>{return[i.one,i.two]}).flat();
+let a_b=a_cards.concat(b_cards);
+//console.log(a_b)	
+let my_card=this.players[j][k];	
+let result=a_b.map((i,index)=>{let e1=(my_card[1]===i[1]);if(e1){return true}})
+let p_i=this.passes===0;	
+let r_a=result.includes(true);
+
+if (r_a||p_i){return true;}//если все Ок промис труе отправляем сокет с данными
+else if(!r_a){return false};	}

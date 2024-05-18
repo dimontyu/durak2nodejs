@@ -43,7 +43,6 @@ export class DurakGame extends LitElement{
 		this.static_role=state.r.pl_roles;
 		this.usernames=state.r.usernames;
         this.echo=this.echo.bind(this);
-        this.taks=this.taks.bind(this);
         this.Rout=this.Rout.bind(this);
         this.cash=[[],[],[],[]];//карты в игре
         this.ws.onmessage=this.echo; //обработчик сообщений сервера 
@@ -90,82 +89,10 @@ this.b_ack= html`<img src=./img/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0
 	 }
 
 
-async task(j,k){
-if(this._myrole==="attacker"){return await this.matrix_attacker(j,k)}//ту ли карту дал
-if(this._myrole==="attacker2"){return await this.matrix_attacker(j,k)}//ту ли карту дал
-if(this._myrole==="defender"){return await this.matrix_defender(j,k)}//если покрыл /true/
-
-}
-//событие сокета 'взял карты или покрыл '
-//на 3    надо сделать на 4 игроков?
 Rout(e){
  Rout.call(this,e);  
    
     }
-
-
-//логика атаки
-async matrix_attacker(j,k){
-let a_cards=this.konduktor.get_aktive();
-let b_cards=this.konduktor.get_back().map((i)=>{return[i.one,i.two]}).flat();
-let a_b=a_cards.concat(b_cards);
-//console.log(a_b)	
-let my_card=this.players[j][k];	
-let result=a_b.map((i,index)=>{let e1=(my_card[1]===i[1]);if(e1){return true}})
-let p_i=this.passes===0;	
-let r_a=result.includes(true);
-
-if (r_a||p_i){return true;}//если все Ок промис труе отправляем сокет с данными
-else if(!r_a){return false};	}//добавить обработчик соответствия карт attacker
-async matrix_attacker2(j,k){return true}//добавить обработчик соответствия карт attacker2
-
-
-//логика обороны
-async matrix_defender(j,k){
-let my_card=this.players[j][k];
-
-
-let a_cards=this.konduktor.get_aktive();
-
-let result=a_cards.map((i,index)=>{
-    let e1=(my_card[0]===i[0]);//проверяем соответствие карт
-    let e2=this.ranks.indexOf(my_card[1]);
-    let e3=this.ranks.indexOf(i[1]);
-    let e4=(my_card[0]===this.active_suit);
-    let e5=(i[0]!==this.active_suit);
-    
-    if((e1&&(e2>e3))||(e4&&e5)){
-    let v=a_cards.indexOf(i);// console.log(`v:${v}`)
-    a_cards.splice(v,1);
-    
-    
-	this.konduktor.set_back(i,my_card,this.passes-1)
- 
-    return 'back'}})
-//console.log(result);
-
-if ((result.includes('back'))){return true;}//если все Ок промис труе отправляем сокет с данными
-else {return false};
-}//если нет карта не двигаетья 
-
-
-taks(){let a_cards=this.konduktor.get_aktive().length===0;
-let passes=this.passes!==0;
-let bool=(this._myrole==='attacker' || this._myrole==='attacker2' )?a_cards&&passes:!a_cards&&passes;
-console.log(bool);
-if(bool){
-if(this.players_count===2){
-
-let a=(this._myrole==='attacker')?this.target:this._pos1;
-
-this.w_m={type:"set","taks":`${a}`,"players":this.target,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"roles":this._role};}
-else{
-let a=(this._myrole==='attacker' || this._myrole==='attacker2' )?this.target:1;//this.sorted_pos();
-
-this.w_m={type:"set","taks":`${a}`,"players":this.target,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"roles":this._role};}
-
-}return 0;
- };
 
 
 

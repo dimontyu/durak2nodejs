@@ -60,7 +60,7 @@ app.post('/init', cors(), jsonParser, function (req, res) { init(req, res) });
 
 var dev_db_url =process.env.MONGODB_URI;
 var LmongoDB = 'mongodb://localhost:27017/durak';
-var mongoDB = LmongoDB;//dev_db_url
+var mongoDB = dev_db_url??LmongoDB;//dev_db_url
 //var mongoDB = 'mongodb://localhost:27017/' 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }).catch(error => handleError(error));
 mongoose.Promise = global.Promise;
@@ -108,6 +108,9 @@ wss.on('connection', function (ws,request) {connect.connect(WebSocket,wss,ws,map
 //
 // Start the server.
 //
-server.listen(8001, function () {
-  console.log('Listening on http://localhost:8001');
+//app.listen(process.env.APP_PORT, process.env.APP_IP);
+const PORT = process.env.APP_PORT;
+const IP = process.env.APP_IP;
+server.listen(PORT,IP, function () {
+  console.log('Listening on'+PORT);
 });

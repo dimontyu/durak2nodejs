@@ -8,8 +8,8 @@ let  j=Number(d.play)
 let k=Number(d.pos)
 
 
-let task=this.task(j,k)
-if (await task===true){//если карту покрыл
+let task= await matrix_defender.call(this,j,k);
+if ( task===true){//если карту покрыл
 
 let broken_card=this.konduktor.broken_card();
 
@@ -35,4 +35,31 @@ this.konduktor.deff()
    this.w_m={type:"set","players":d.play,"pos":d.pos,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"passes":this.passes,broken_card:broken_card,"roles":this._role};//отправка рендера всем
 }
    
+}
+
+async function matrix_defender(j,k){
+let my_card=this.players[j][k];
+
+
+let a_cards=this.konduktor.get_aktive();
+
+let result=a_cards.map((i,index)=>{
+    let e1=(my_card[0]===i[0]);//проверяем соответствие карт
+    let e2=this.ranks.indexOf(my_card[1]);
+    let e3=this.ranks.indexOf(i[1]);
+    let e4=(my_card[0]===this.active_suit);
+    let e5=(i[0]!==this.active_suit);
+    
+    if((e1&&(e2>e3))||(e4&&e5)){
+    let v=a_cards.indexOf(i);// console.log(`v:${v}`)
+    a_cards.splice(v,1);
+    
+    
+	this.konduktor.set_back(i,my_card,this.passes-1)
+ 
+    return 'back'}})
+//console.log(result);
+
+if ((result.includes('back'))){return true;}//если все Ок промис труе отправляем сокет с данными
+else {return false};
 }

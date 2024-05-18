@@ -7,9 +7,8 @@ import {render_left as Left} from './render_left.js';
 
 
 export function Render(html,styleMap){
-//images_render.bind(this);		
-//Img.bind(this);	
-	
+
+Taks.bind(this);	
  let items = [
       {id: 0, name: 'J'},
       {id: 1, name: 'S'},
@@ -48,13 +47,13 @@ function span_atr(x){let a=(x==="attacker")?span_1:(x==="defender")?span_2:null;
  let ix_text=(this._role[0]==="attacker")?"ваш ход":(this._role[0]==="attacker2")?"подкидывай карты":"вам крыться";
  let iy_text=(this._role[0]==="attacker")?"бито":(this._role[0]==="attacker2")?"бито":"беру";
  
-let span_0=html`<span @click=${this.taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
+let span_0=html`<span @click=${Taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
 
 let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,po):[null,null];//PRERENDER	
 let n=this.players_count;	
-let LEFT=(n>=3)?Img.call(this,this._pos2,'l'):null;
+let LEFT=(n>=3)?Img.call(this,this._pos2,'l',html):null;
 
-let RIGHT=(n===4)?Img.call(this,this._pos3,'r'):null;
+let RIGHT=(n===4)?Img.call(this,this._pos3,'r',html):null;
 
 let Header=Img.call(this,this._pos1,'0');
 
@@ -112,3 +111,21 @@ ${span_u0}
 
 return body;
 };
+
+function Taks(){let a_cards=this.konduktor.get_aktive().length===0;
+let passes=this.passes!==0;
+let bool=(this._myrole==='attacker' || this._myrole==='attacker2' )?a_cards&&passes:!a_cards&&passes;
+console.log(bool);
+if(bool){
+if(this.players_count===2){
+
+let a=(this._myrole==='attacker')?this.target:this._pos1;
+
+this.w_m={type:"set","taks":`${a}`,"players":this.target,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"roles":this._role};}
+else{
+let a=(this._myrole==='attacker' || this._myrole==='attacker2' )?this.target:1;//this.sorted_pos();
+
+this.w_m={type:"set","taks":`${a}`,"players":this.target,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"roles":this._role};}
+
+}return 0;
+ };
