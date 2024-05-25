@@ -26,7 +26,7 @@ const styles=function(ww,i,ps,p){
 let a=positing[ps-1].top2;
 let a_trm=`translateY(${a})`;
 let l_trm=ww;
-let r_trm=`translateY(${a})`;
+//let r_trm=`translateY(${a})`;
 let trm=(ww?.length>10)?l_trm:a_trm;
 let Left=(ww?.length>10)?A[ps]:`${!ww?A[ps-1]:ww}`
 let s={transform:trm,
@@ -46,20 +46,21 @@ if(i===this._pos0){return}
 if(e.type==='round-taks'){return}
 let ii=(i===this._pos2)||(i===this._pos3)
 
-function sort(ww,x){
+function sort(sw,x){
 let a=this._a;
 let m=[];	
-
-let index=a.map((item,i,r)=>{if((item[0])===(x[0])&&(item[1])===(x[1]))return i}).filter((i)=>i!==undefined)[0]	
+//найти индекс хода для позиции пары  
+let index=a.map((item,i,r)=>{if((item[0])===(x[0])&&(item[1])===(x[1]))return i}).filter((i)=>i!==undefined)[0]
+//нормализация стилей карт	
 positing.forEach((pos,i,as)=>	
-{if(ii&&(ww===pos.transform)){m.push(as[index].transform);return }
+{if(ii&&(sw===pos.transform)){m.push(as[index].transform);/* console.log('ii&&(sw===pos.transform)'); */return }
 
-if(ii&&(ww===pos.left)){ m.push(as[index].transform);return}
+if(ii&&(sw===pos.left)){ m.push(as[index].transform);/* console.log('ii&&(sw===pos.left)'); */return}
 
-if(!ii&&(ww===pos.transform)){ m.push(as[index].left);return}
+if(!ii&&(sw===pos.transform)){ m.push(as[index].left);/* console.log('!ii&&(sw===pos.transform)'); */return}
 
-})
-return m.length!==0?m:[ww];
+});m.length!==0?console.log(`m${m}`):console.log(`sw${[sw]}`);
+return m.length!==0?m:[sw];
 };
 
 this.passes=e.passes;
@@ -73,15 +74,15 @@ let ps=e.passes;
 	
 if((this._myrole==='attacker')||(this._myrole==='attacker2')){
 	
-	let wm3=this.konduktor.get_wm3();
+	//let wm3=this.konduktor.get_wm3();
 	let wm2=this.konduktor.get_wm2();
 	let wm1=this.konduktor.get_wm1();
 	let y=this.cash[i];
     let action_card=y.map((x,i,a)=>{if(x!==null){
 	
-	let sw=(wm2.has(x))?wm1.get(wm2.get(x)):'';
+	let sw=(wm2.has(x))?wm1.get(wm2.get(x)):'';//если пара карт
 	let ww;
-	ww=sw?sort.call(this,sw,wm2.get(x))[0]:wm1.get(x);
+	ww=sw?sort.call(this,sw,wm2.get(x))[0]:wm1.get(x);//если пара или одна
 	
 let var_styl=styleMap(styles(ww,i,ps,p))	
     let [sym, ra] = [x[0],x[1]];

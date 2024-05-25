@@ -1,6 +1,6 @@
 import {repeat} from 'lit/directives/repeat.js';
 import {images_render as Img} from './images_render.js';
-import {positing as po}from './positing.js';
+//import {positing as po}from './positing.js';
 import {Prerender}from './prerender.js';
 import {render_right as Right} from './render_right.js';
 import {render_left as Left} from './render_left.js';
@@ -49,7 +49,7 @@ function span_atr(x){let a=(x==="attacker")?span_1:(x==="defender")?span_2:null;
  
 let span_0=html`<span @click=${Taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
 
-let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,po):[null,null];//PRERENDER	
+let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,null):[null,null];//PRERENDER	
 let n=this.players_count;	
 let LEFT=(n>=3)?Img.call(this,this._pos2,'l'):null;
 

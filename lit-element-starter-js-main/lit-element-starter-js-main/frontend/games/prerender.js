@@ -1,4 +1,6 @@
-export function Prerender(A){
+import {positing as A}from './positing.js';
+
+export function Prerender(){
 	
 let e=this._echo;
 this.passes=e.passes;
