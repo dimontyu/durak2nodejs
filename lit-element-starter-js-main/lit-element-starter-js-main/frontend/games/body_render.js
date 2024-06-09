@@ -71,7 +71,8 @@ ${n>=3?Left.call(this,LEFT,span_atr(this._role[2]),span_u2):null}
 <div class="field">
 <header  class="header">
 <div class="player1_container">
-<div id="1count" class="player1CardsContainer"><div  id=${this.deck_id[this._pos1]}>${Header}</div></div>
+<div id="1count" class="player1CardsContainer">
+<div  id=${this.deck_id[this._pos1]} style='z-index:${this._role[1]==='defender'?2:-1}'>${Header}</div></div>
 <h4 class="text-h4"style="top: -69px;
     position: relative;">
 ${span_atr.call(this,this._role[1])}
@@ -104,7 +105,8 @@ ${span_u0}
 <h4 class="text-h4">
 <span class=" player0-role textA">${this._role[0]}</span>
 </h4>${span_0}
-<div id="0count" class="player0CardsContainer"><div  id=${this.deck_id[this._pos0]}>${Footer}</div></div>
+<div id="0count" class="player0CardsContainer">
+<div  id=${this.deck_id[this._pos0]} style='z-index:${this._role[0]==='defender'?2:-1}'>${Footer}</div></div>
 </div>
 </footer>
 </div></div>`

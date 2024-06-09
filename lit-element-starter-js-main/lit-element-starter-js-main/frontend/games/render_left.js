@@ -4,7 +4,7 @@ import {html} from 'lit';
 
 export function render_left(left,sp,span_u2){return html`<div  class="left">
 
-<div id="2count" class="player2CardsContainer">${left}</div>
+<div id="2count" class="player2CardsContainer" style='z-index:${this._role[2]==='defender'?2:-1}'>${left}</div>
   <div class="player-title">
     <h4 class="text-h4">
 	${sp}

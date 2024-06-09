@@ -3,7 +3,7 @@ import {html} from 'lit';
 
 export function render_right(right,sp,span_u3){return html`<div  class="right">
 
- <div id="3count" class="player3CardsContainer">${right}</div>
+ <div id="3count" class="player3CardsContainer"style='z-index:${this._role[3]==='defender'?2:-1}'>${right}</div>
   <div class="player-title">
     <h4 class="text-h4">
 	${sp}

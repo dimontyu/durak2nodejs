@@ -27,7 +27,10 @@ if(e.bito===true && this.players_count===2){this._role.reverse();
 if(this._myrole==="defender"){this._myrole="attacker"}
 else{this._myrole="defender"}
 
-}this._round +=1 ;this._echo=e;
+}
+this.static_role[this._pos0]=this._role[0]??null;
+this.static_role[this._pos1]=this._role[1]??null;
+this._round +=1 ;this._echo=e;
 	 }
 if(this.players_count===3){
 let m_role=this._myrole;
@@ -67,7 +70,10 @@ if(m_a2&&i==="attacker2" ){A[index]="attacker"}
 
 //console.log(this._myrole)
 }
-
+this.static_role[this._pos0]=this._role[0]??null;
+this.static_role[this._pos1]=this._role[1]??null;
+this.static_role[this._pos2]=this._role[2]??null;
+//this._role[3]=this.static_role[this._pos3]??null;
 this._round +=1 ;
 this._echo=e;
 //console.log(this._role);

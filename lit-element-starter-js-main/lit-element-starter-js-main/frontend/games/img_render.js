@@ -22,25 +22,31 @@ import {positing}from './positing.js';
             out:fly[2],
           });
 		  
-const styles=function(ww,i,ps,p){
+const styles=function(ww,ps,p){
+
+	
 let a=positing[ps-1].top2;
 let a_trm=`translateY(${a})`;
 let l_trm=ww;
 //let r_trm=`translateY(${a})`;
 let trm=(ww?.length>10)?l_trm:a_trm;
 let Left=(ww?.length>10)?A[ps]:`${!ww?A[ps-1]:ww}`
+//console.log(Left)
 let s={transform:trm,
 left:Left,
-width: `57px`,}	
+width: `57px`,
+}	
 return s };	
 
 
 	  
-		  
+//УСТАНОВИТЬ Z-INDEX для битых карт ниже!!!Ё
+//УСТАНОВИТЬ жесткие кадры для каждого хода		  
 		  
 
  
  export function Img_render(e,i,p){
+ 
 if(e.id===this.id){return}
 if(i===this._pos0){return}
 if(e.type==='round-taks'){return}
@@ -59,7 +65,7 @@ if(ii&&(sw===pos.left)){ m.push(as[index].transform);/* console.log('ii&&(sw===p
 
 if(!ii&&(sw===pos.transform)){ m.push(as[index].left);/* console.log('!ii&&(sw===pos.transform)'); */return}
 
-});m.length!==0?console.log(`m${m}`):console.log(`sw${[sw]}`);
+});//m.length!==0?console.log(`m${m}`):console.log(`sw${[sw]}`);
 return m.length!==0?m:[sw];
 };
 
@@ -84,7 +90,8 @@ if((this._myrole==='attacker')||(this._myrole==='attacker2')){
 	let ww;
 	ww=sw?sort.call(this,sw,wm2.get(x))[0]:wm1.get(x);//если пара или одна
 	
-let var_styl=styleMap(styles(ww,i,ps,p))	
+let var_styl=styleMap(styles(ww,ps,p))
+
     let [sym, ra] = [x[0],x[1]];
     let suit = suitsMapping2[sym];
     let img=`./img/${suit}${ra}.png`; 
@@ -105,7 +112,8 @@ if(this._myrole==='defender'){
     let action_card=y.map((x,i,a)=>{if(x!==null){
 	let ww=(wm3.has(x))?wm3.get(x):null	
 	
-let var_styl=styleMap(styles(ww,i,ps,p))	
+let var_styl=styleMap(styles(ww,ps,p))
+	
     let [sym, ra] = [x[0],x[1]];
     let suit = suitsMapping2[sym];
     let img=`./img/${suit}${ra}.png`; 
