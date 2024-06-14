@@ -60,6 +60,7 @@ async function defender_main(t, ui, map, msg, Durak) {
         if (nn6 > 0 && game.deck.length !== 0) {
             await popdek(game.deck, game.players[ie], nn6)
         }
+        if (game.players[ie].length === 0) { game.players.splice[ie, 1] }
     }
 
     let gam_n = game; //console.log(result);
@@ -83,6 +84,7 @@ async function attaker_main(t, u, map, msg, Durak) {
 
         }
         game.cach[ie] = [];
+        if (game.players[ie].length === 0) { game.players.splice[ie,1] }
     }
     let gam_n = game; //console.log(result)
     let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true });

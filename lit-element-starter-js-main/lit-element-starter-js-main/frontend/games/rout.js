@@ -19,9 +19,31 @@ this.konduktor.clearAll();
 let new_count=aa.includes(false);if(new_count){this.new_count=true};
 
  
-  this.shadowRoot.querySelectorAll('.cards_number-6').forEach((i)=>{i.style.top='0px';i.removeAttribute("style");i.classList.add(`cards_number-${6}-hover`);});      
-        
-     
+  this.shadowRoot.querySelectorAll('.cards_number-6').forEach((i)=>{i.style.top='0px';i.removeAttribute("style");i.classList.add(`cards_number-${6}-hover`);});
+  
+  
+  
+function transform(){let pos=[this._pos0,this._pos1,this._pos2,this._pos3] ;this._role.forEach((i,index,A)=>{
+ let indx=this.players[pos[index]].length===0;
+if(i==='defender'&&indx){
+	
+A[index+1]?A[index+1]=i:A[0]=i;
+A.splice(index,1);
+this.players.splice(pos[index],1);
+this.static_role.splice(pos[index],1);
+this.players_count=this.players_count-1
+this._round +=1 ;this._echo=e;
+return 0;
+}
+if((i==='attacker'&&indx)||(i==='attacker2'&&indx)){//A[index+1]?A[index+1]=i:A[0]=i;
+A.splice(index,1);
+this.players.splice(pos[index],1);
+this.static_role.splice(pos[index],1);
+this.players_count=this.players_count-1}
+})        
+}
+transform.call(this,null);
+    
 if(this.players_count===2){	  
 if(e.bito===true && this.players_count===2){this._role.reverse();
 if(this._myrole==="defender"){this._myrole="attacker"}
@@ -32,13 +54,14 @@ this.static_role[this._pos0]=this._role[0]??null;
 this.static_role[this._pos1]=this._role[1]??null;
 this._round +=1 ;this._echo=e;
 	 }
-if(this.players_count===3){
+if(this.players_count===3){	
+	
 let m_role=this._myrole;
 let m_d=this._myrole==="defender";
 let m_a=this._myrole==="attacker";
 let m_a2=this._myrole==="attacker2";	
-if(e.bito===true ){this._role.forEach((i,index,A)=>{if(m_d&&i==="defender" )
-{this._myrole="attacker";A[index]="attacker"}
+if(e.bito===true ){this._role.forEach((i,index,A)=>{	
+if(m_d&&i==="defender" ){this._myrole="attacker";A[index]="attacker"}
 if(m_d&&i==="attacker" ){A[index]="attacker2"}
 if(m_d&&i==="attacker2" ){A[index]="defender"}
 

@@ -46,6 +46,7 @@ function span_atr(x){let a=(x==="attacker")?span_1:(x==="defender")?span_2:null;
 	 
  let ix_text=(this._role[0]==="attacker")?"ваш ход":(this._role[0]==="attacker2")?"подкидывай карты":"вам крыться";
  let iy_text=(this._role[0]==="attacker")?"бито":(this._role[0]==="attacker2")?"бито":"беру";
+ let i_am_go=(x)=>{return this.players[x].length===0?'я вышел':'0'};
  
 let span_0=html`<span @click=${Taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
 
@@ -65,8 +66,8 @@ let section=this.renderDeck();
 let b_ack=this.b_ack;//когда кончиться колода отобразить козыря
 
 const body= html`<div class=super>
-${n>=3?Left.call(this,LEFT,span_atr(this._role[2]),span_u2):null}
- ${n===4?Right.call(this,RIGHT,span_atr(this._role[3]),span_u3):null}
+${n>=3?Left.call(this,LEFT,span_atr(this._role[2]),span_u2,i_am_go(p_2)):null}
+ ${n===4?Right.call(this,RIGHT,span_atr(this._role[3]),span_u3,i_am_go(p_3)):null}
  
 <div class="field">
 <header  class="header">
@@ -80,7 +81,7 @@ ${span_u1}
 <span class="player1-role textA">${this._role[1]}</span>
 </h4>
 <h4 class="text-h4">
-<span class="player1-name textB">${this._pos1}</span>
+<span class="player1-name textB">${i_am_go(p_1).length>3?i_am_go(p_1):this._pos1}</span>
 </h4>
 </div>
 </header>
@@ -100,7 +101,7 @@ ${section??b_ack}
 <div class="player0_container">
 <h4 class="text-h4">
 ${span_u0}
-<span class="text-dark player0-name textB">${this._pos0}</span>
+<span class="text-dark player0-name textB">${i_am_go(p_0).length>3?i_am_go(p_0):this._pos0}</span>
 </h4>
 <h4 class="text-h4">
 <span class=" player0-role textA">${this._role[0]}</span>
