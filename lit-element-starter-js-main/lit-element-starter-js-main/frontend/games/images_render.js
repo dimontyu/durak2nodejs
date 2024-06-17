@@ -18,6 +18,7 @@ else{
 	
 	
 let nn=(this._myrole==="attacker"||this._myrole==="attacker2");
+
 let n=this.target; 
 let pl=this.players.filter((x)=>x!==null);   
 let t=pl[n] ;

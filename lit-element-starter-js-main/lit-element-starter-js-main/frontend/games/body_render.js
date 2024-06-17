@@ -24,9 +24,9 @@ Taks.bind(this);
 
 
 
-
+//this.target=this.static_role.indexOf(this._myrole)
 	let [p_0,p_1,p_2,p_3]=[this._pos0,this._pos1,this._pos2,this._pos3]; 
- 
+    let q=this._myrole!=='observe'; 
 	let a=(this.passes===0);
 	let eho=(this._echo?.type==="round-taks");
 const styles=function(a,b,c){let s= {transform:`rotatez(${a}deg) translateY(${b}px) translateX(${c}px)`,
@@ -46,7 +46,7 @@ function span_atr(x){let a=(x==="attacker")?span_1:(x==="defender")?span_2:null;
 	 
  let ix_text=(this._role[0]==="attacker")?"ваш ход":(this._role[0]==="attacker2")?"подкидывай карты":"вам крыться";
  let iy_text=(this._role[0]==="attacker")?"бито":(this._role[0]==="attacker2")?"бито":"беру";
- let i_am_go=(x)=>{return this.players[x].length===0?'я вышел':'0'};
+ let i_am_go=(x)=>{return this.players[x]?.length===0?'я вышел':'0'};
  
 let span_0=html`<span @click=${Taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
 
@@ -58,7 +58,7 @@ let RIGHT=(n===4)?Img.call(this,this._pos3,'r'):null;
 
 let Header=Img.call(this,this._pos1,'0');
 
-let Footer=a||eho?Img.call(this,this._pos0):this.foo;//сохранить чтобы не рендерить себя до конца раунда
+let Footer=(a||eho)&&q?Img.call(this,this._pos0):this.foo;//сохранить чтобы не рендерить себя до конца раунда
 
 a||eho?this.foo=Footer:null;
 
@@ -104,7 +104,7 @@ ${span_u0}
 <span class="text-dark player0-name textB">${i_am_go(p_0).length>3?i_am_go(p_0):this._pos0}</span>
 </h4>
 <h4 class="text-h4">
-<span class=" player0-role textA">${this._role[0]}</span>
+<span class=" player0-role textA">${this._role[0]===this._myrole?this._role[0]:this._myrole}</span>
 </h4>${span_0}
 <div id="0count" class="player0CardsContainer">
 <div  id=${this.deck_id[this._pos0]} style='z-index:${this._role[0]==='defender'?2:-1}'>${Footer}</div></div>
