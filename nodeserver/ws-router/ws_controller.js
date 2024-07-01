@@ -1,5 +1,5 @@
 'use strict'
-//НЕ используеться .ИСпользовать ws.ws.js
+//не используеться использовать ws.ws.js
 let ChatGame=require('../chat/chat');
 let Game_mongo=require('../game/long-game/durak.mongo');
 let Game_game = require('../game/long-game/durak.game');

@@ -51,12 +51,12 @@ this.static_role.splice(pos[index],1);
 this.players_count=this.players_count-1 */}
 })        
 }
-transform.call(this,rec);
+this.players_count!==2?transform.call(this,rec):null;
     
 if(this.players_count===2){	  
 if(e.bito===true && this.players_count===2){this._role.reverse();
 if(this._myrole==="defender"){this._myrole="attacker"}
-if(this._myrole==='observe'){}
+//if(this._myrole==='observe'){}
 else{this._myrole="defender"}
 
 }
