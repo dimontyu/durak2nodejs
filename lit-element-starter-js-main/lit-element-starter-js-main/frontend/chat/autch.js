@@ -66,10 +66,10 @@ if(e.type=="susses" && e.error){this.autch_message=` ${e.error}`;this.requestUpd
  }
 /*  2 Вызов */
 async connect(){	
-	let user="btn-pw1";let User=localStorage.getItem(`${user}`)
+	let user="Btn-pw1";let User=localStorage.getItem(`${user}`)
 	let nouser='no-autch';let Nouser=localStorage.getItem(`${nouser}`)
 if(User||Nouser){	
-var xx=User?localStorage.getItem(`${user}`):localStorage.getItem(`${nouser}`);
+var xx=User?User:Nouser;
 var data=xx?JSON.parse(xx):undefined;
 var res=JSON.stringify({type:"connect-user","name":data.name,token:data.token,password:data.password})
 data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
@@ -83,19 +83,20 @@ data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
  router_echo1.call(this,e)
  }
   
-pre(e){if( e.token){
-let l_i=localStorage.getItem('btn-pw1')
+pre(e){if( e.token){console.log(e);
+let l_i=localStorage.getItem('Btn-pw1')
 let l_j=localStorage.getItem('no-autch')
 	
 let x=JSON.parse(l_i??l_j);x.token=e.token;let y=JSON.stringify(x);
 
 //console.log(x)
 
-l_i?localStorage.setItem('btn-pw1',y):localStorage.setItem('no-autch',y);}
+l_i?localStorage.setItem('Btn-pw1',y):localStorage.setItem('no-autch',y);}
 };
 
 async ws_plinstall(ev){console.log(ev.data)
-this.ws1=ws_player?.ws??null;this.ws1?this.ws1.addEventListener("message",this.echo1):null;
+this.ws1=ws_player?.ws??null;
+this.ws1?this.ws1.addEventListener("message",this.echo1):null;
 
 	
 if(ev){let e=!(ev.data.result)?JSON.parse(ev.data):this.pre(ev.data);
@@ -112,15 +113,15 @@ this._User=e.user;
 /*  Первый вызов  */
 get action(){let arr=[]; var yy=localStorage.getItem('no-autch'); for(let i=1;i<=3;i++){
 	
-	var xx=localStorage.getItem('btn-pw'+i);
+	var xx=localStorage.getItem('Btn-pw'+i);
 if(i===1 && !xx){yy?xx=yy:null}	
 	
-	var x=xx?arr.push(JSON.parse(xx)):arr.push(null);
+var x=xx?arr.push(JSON.parse(xx)):arr.push(null)
 }return arr;};
 
 get target(){return this.ackount};
 
-get Storage(){let t=this._listItems;for(let item=0; item<=t.length-1;item++){if(t[item]!==null){let x=JSON.stringify(t[item]);  localStorage.setItem('btn-pw'+(item+1),x);this.clickHandler()}else    return 0}};
+get Storage(){let t=this._listItems;for(let item=0; item<=t.length-1;item++){if(t[item]!==null){let x=JSON.stringify(t[item]);  localStorage.setItem('Btn-pw'+(item+1),x);this.clickHandler()}else    return 0}};
 
  
 set target(val){var xx=localStorage.getItem(val);
@@ -154,7 +155,7 @@ let array_id=['bx','cx','dx'];
 const todos =!xor?html`${
 items.map(function(item,index){ return item? html`
             <div class='mod'
-                id=${array_id[index]} data-npw=${'btn-pw'+(index+1)} @click=${t.sset}
+                id=${array_id[index]} data-npw=${'Btn-pw'+(index+1)} @click=${t.sset}
                >${item?.name}
 </div>`:null}
 )}`:null

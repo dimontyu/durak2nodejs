@@ -18,9 +18,9 @@ export function render_modalThree(){
 	
 	
 //сообщения игроков
-let chat_content=this._ChatItems.map((value)=>
+let chat_content=this._ChatItems.map((value,index,a)=>
 {return html`
-    <li ><h3>${value?.name}</h3>
+    <li class='chat_content${index}'  ><h3>${value?.name}</h3>
     <span class='u' hidden>answer</span>
     <span class='u' data-id=${value?.id} >${value?.message}</span></li>
 `});

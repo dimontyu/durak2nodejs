@@ -11,17 +11,19 @@ const register = require('./autch/registration');
 const init = require('./autch/init');
 const connect=require('./connect');
 //import WebSocket, { WebSocketServer } from 'ws';
-const jsonParser = express.json();
+const bodyParser = require('body-parser');
 function onSocketError(err) {
   console.error(err);
 }
 
 const app = express();
  const map = new Map();
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 //
 // We need the same instance of the session parser in express and
 // WebSocket server.
+
 let RedisStore = require("connect-redis").default;
 const { createClient } = require("redis");
 
@@ -52,11 +54,11 @@ app.use(cors())
 
 app.use(express.static('public'));
 app.use(sessionParser);
-app.post('/login', cors(), jsonParser, function(req,res){ let n=map ; autch.login(req,res,n)});
-app.delete('/logout',function(req,res){let n=map ;  autch.logout(req,res,n)});
-app.post('/lg', cors(), jsonParser, function (req, res) { autch.loginGET(req, res) });
-app.post('/register', cors(), jsonParser, function (req, res) { register(req, res) });
-app.post('/init', cors(), jsonParser, function (req, res) { init(req, res) });
+app.post('/login', (req,res)=> autch.login(req,res,map));
+app.delete('/logout',(req,res)=> autch.logout(req,res,map));
+app.post('/lg', (req,res)=> autch.loginGET(req,res));
+app.post('/register',(req,res)=> register(req,res));
+//app.post('/init', cors(), jsonParser, function (req, res) { init(req, res) });
 
 var dev_db_url =process.env.MONGODB_URI;
 var LmongoDB = 'mongodb://localhost:27017/durak';

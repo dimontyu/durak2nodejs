@@ -1,6 +1,6 @@
 'use strict'
-
-
+const bCrypt = require('bcrypt');
+const User = require('../models/user');
 const uuid = require('uuid');
 const init = require('./init');
 exports.login=async function(req,res,map) {
@@ -13,13 +13,17 @@ exports.login=async function(req,res,map) {
   res.send(JSON.stringify(msg));
 };
 
-exports.logout=function(request,response,map) {
+exports.logout=async function(request,response,map) {
   const ws = map.get(request.session.userId);
 
   console.log('Destroying session');
-  request.session.destroy(function () {
+  request.session.destroy(async function () {
     if (ws) ws.close();
-
+if (request.body.token&&!request.body.password){await User.deleteOne({token:request.body.token})}
+if (!request.body.token&&request.body.password){let inuser=await User.findOne({name:request.body.name})
+let inits=inuser?initHash(request.body.password,inuser):false;	
+inits?await User.deleteOne({hash:inuser.hash}):null;
+};
     response.send({ result: 'OK', message: 'Session destroyed' });
   });
 };
@@ -36,3 +40,6 @@ exports.loginGET= function(request,response) {
   
 };
 
+let initHash = function (password,user) {
+    return bCrypt.compareSync(password, user.hash);
+}

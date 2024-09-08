@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body >
+<body id='o7'>
     <script>
         //const bc = new BroadcastChannel("test_channel");
         //bc.postMessage("This is a test message.");
@@ -19,10 +19,11 @@
            // console.log(e.data); //e.target.postMessage(e.data, '*')
            // window.parent.postMessage('data', '*');
         // })
+	
         let dt;
 
  function login(dt) {
-     fetch('http://localhost:8001/login', {
+     fetch(`/login`, {
          method: 'POST', credentials: 'same-origin', headers: {
              Origin: '*',
              'Content-Type': 'application/json'

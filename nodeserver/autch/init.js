@@ -3,7 +3,8 @@ const User = require('../models/user');
 const bCrypt = require('bcrypt');
 const uuid = require('uuid');
 module.exports = async function (req, res, userId) {
-   // console.log(req.session.userId)
+    // console.log(req.session.userId)
+    console.log(`userId${userId}`)
     if (!req.body) return res.sendStatus(400);
    // console.log(req.body)
     let user_name = (req.body.name === "GamerX") ?null : req.body.name;

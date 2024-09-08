@@ -4,6 +4,7 @@ export function send(){let msg={type:"chat",name:this._listItems[0]?.name,id:thi
  this.ws1.send(JSON.stringify(msg));}
  this._input_msg='';
 this.shadowRoot.querySelector('.form-control').value='';
+
  }
  
 export function input_msg(e){this._input_msg =e.target.value;console.log(this._input_msg)};

@@ -8,9 +8,10 @@ module.exports = async function (userId, map, Game, path) {
 	const name_id = uuid.v4();//id- game example
 	let exg = jjj.play_game();
 	exg.name = name_id;
-	let y = await User.findOne({ session_id: userId })
+	let y = await User.findOne({ session_id: userId });
+	let yname = y ?? { name: "COLLAPSE" };
 	Game.delete(userId);
-	let [G_m, D_id] = await sort(Game, y.name, userId, path);
+	let [G_m, D_id] = await sort(Game, yname.name, userId, path);
 	exg.deck_id = D_id;
 	exg.usernames = G_m;
 	exg.cach = [[], [], [], []];
@@ -48,7 +49,8 @@ async function sort(Game, usr, uid, path) {
 	deck_id.push(uid);
 	for (const item of Game) {
 		let y = await User.findOne({ session_id: item })
-		gamers.push(y.name);
+		let yname = y ?? { name: "COLLAPSE" };
+		gamers.push(yname.name);
 		deck_id.push(item)
 		Game.delete(item)
 		i += 1
