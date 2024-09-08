@@ -23,11 +23,13 @@ export function  in_user(e){
  
  } };
  
-export function account_install(e){
+export async function account_install(e){
 if(this.target.token===undefined){	 
 let data={type:"init-user",user:this.target.name,password:this.target.password,index:this.target.index}	 
 	 //this.ws.send(JSON.stringify(data));
-postData("POST",`${hosts}/register`,data).then(this.echo(data))
+let response=await postData("POST",`${hosts}/register`,data);
+response.password=this.target.password;
+this.echo(response);
 }};
 
 export function clearone(e){

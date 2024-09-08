@@ -49,16 +49,19 @@ this.autch_message='hello world';
  ws1=ws_player?.ws;//порты игры
 
 echo(e){
-console.log(e)
+console.log(e.type)
 
-if(e.type=="autorisation" && e.token){let l_i=localStorage.getItem(e.index)
-let x=JSON.parse(l_i);x.token=e.token;let y=JSON.stringify(x);
+if(e.type=="autorisation" && e.token){//let l_i=localStorage.getItem(e.index)
+//let x=JSON.parse(l_i);x.token=e.token;let y=JSON.stringify(x);
+let y=JSON.stringify(e)
 console.log(e.index)
-console.log(x)
-
+//console.log(x)
+console.log(this)
 localStorage.setItem(e.index,y);
 this.autch_message=`you registered as ${e.name}`;
-this.requestUpdate();	
+
+//this.requestUpdate();
+ this.clickHandler()	
 }
 if(e.type=="susses" && !e.error){this.autch_message=`You are logged in as ${e.name}`;this.requestUpdate();}
 if(e.type=="susses" && e.error){this.autch_message=` ${e.error}`;this.requestUpdate();}
