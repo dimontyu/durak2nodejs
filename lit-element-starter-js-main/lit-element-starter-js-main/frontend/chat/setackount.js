@@ -39,7 +39,7 @@ if(this.target.token||this.target.name){
 let data={type:"uninstall-user",name:this.target.name,token:this.target.token,password:this.target.password}	 
 	 //this.ws.send(JSON.stringify(data));
 postData("DELETE",`${hosts}/logout`,data)	 
-let cw=this.target.index;
+let cw=this.target.index;console.log(cw)
 localStorage.removeItem(cw);let k=this._listItems.findIndex(i=> i?.index===cw);console.log(k)
 this._listItems[k]=null;        return this.clickHandler() 
  }

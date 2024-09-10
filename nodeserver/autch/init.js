@@ -11,7 +11,7 @@ module.exports = async function (req, res, userId) {
     
     let password = req.body.password;
     let user = user_name? await User.findOne({ name: user_name }): await User.findOne({ token: req.body.token });
-    let inithashed = user && user_name ? initHash(password,user):false;
+    let inithashed = user && user_name && password ? initHash(password,user):false;
     if (user && inithashed ) {
         let message = { result: 'OK', 'type': 'susses', name: user.name, token: user.token }
         user.session_id = userId; await user.save()
@@ -28,14 +28,15 @@ module.exports = async function (req, res, userId) {
     }
     //use anonimus
     if (!user) {
-        let user_password = req.body.password;
-        let hashed = createHash(user_password); 
+        let user_password = req.body.password ? req.body.password : uuid.v4();
+        let hashed = createHash(user_password);
         let join_key = uuid.v4()
         let user = new User({ name: req.body.name, hash: hashed, token: join_key, frends_name: [], postmessage: [], email: '', session_id: userId })
         await user.save();
-        let message = { result: 'OK', 'type': 'susses', name: user.name, token: user.token }
+        let message = { result: 'OK', 'type': 'susses', name: user.name, token: user.token, password: user_password }
         return message;
     }
+    else if (user && !inithashed) { let message = { result: 'OK', 'type': 'susses', 'done': "???" }; return message; }
     else {
       
         let message = { result: 'OK', 'type': 'susses','done':"invalid password" }

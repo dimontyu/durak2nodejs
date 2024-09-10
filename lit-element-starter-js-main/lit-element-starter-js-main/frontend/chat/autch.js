@@ -90,7 +90,7 @@ pre(e){if( e.token){console.log(e);
 let l_i=localStorage.getItem('Btn-pw1')
 let l_j=localStorage.getItem('no-autch')
 	
-let x=JSON.parse(l_i??l_j);x.token=e.token;let y=JSON.stringify(x);
+let x=JSON.parse(l_i??l_j);x.token=e.token;e?.password?x.password=e?.password:null;let y=JSON.stringify(x);
 
 //console.log(x)
 
@@ -117,7 +117,10 @@ this._User=e.user;
 get action(){let arr=[]; var yy=localStorage.getItem('no-autch'); for(let i=1;i<=3;i++){
 	
 	var xx=localStorage.getItem('Btn-pw'+i);
-if(i===1 && !xx){yy?xx=yy:null}	
+	var x1=localStorage.getItem('Btn-pw'+(i+1));
+if((i && !xx)&&x1){if(JSON.parse(x1).token){x1?xx=x1:xx=yy;localStorage.setItem('Btn-pw'+i,x1);localStorage.removeItem('Btn-pw'+(i+1))}};
+//if((i===1 && !xx)&&!x1){xx=yy;}	
+
 	
 var x=xx?arr.push(JSON.parse(xx)):arr.push(null)
 }return arr;};
