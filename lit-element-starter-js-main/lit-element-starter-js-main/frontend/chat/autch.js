@@ -74,7 +74,7 @@ async connect(){
 if(User||Nouser){	
 var xx=User?User:Nouser;
 var data=xx?JSON.parse(xx):undefined;
-var res=JSON.stringify({type:"connect-user","name":data.name,token:data.token,password:data.password})
+var res=JSON.stringify({type:"connect-user","name":data?.name,token:data?.token,password:data?.password})
 data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
 }if(!User&&!Nouser){let nackount=JSON.stringify({type:"connect-user",name:'GamerX',password:'000',token:"1S2ec3r4e5T"});localStorage.setItem('no-autch',nackount);window.setTimeout(()=>{frames.autch.postMessage(nackount,'*')},500)}
 }

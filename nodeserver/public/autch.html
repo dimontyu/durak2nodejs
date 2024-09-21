@@ -34,7 +34,7 @@
         async function init () {
             
             
-            fetch('http://localhost:8001/lg', { method: 'POST', credentials: 'same-origin' }, dt)
+            fetch('/lg', { method: 'POST', credentials: 'same-origin' }, dt)
      .then(handleResponse)
      .catch(function (err) {
        console.log(err.message);
