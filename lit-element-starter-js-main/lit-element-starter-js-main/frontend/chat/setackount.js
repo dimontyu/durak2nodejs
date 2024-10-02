@@ -1,5 +1,6 @@
 const iframe = document.querySelector("iframe");
 const hosts=iframe.getAttribute('origin');
+//const hosts=self.document.querySelector('iframe').src
 console.log(hosts)
 export function in_pwd(e){
   
@@ -17,7 +18,7 @@ export function  in_user(e){
   
   
  
- export function ch(){let t=this._listItems; console.log(t);  if(this.ackount.name){for(let item=0; item<=t.length-1;item++){if(t[item]===null){this.ackount.index='Btn-pw'+(item+1);   t[item]= this.ackount; return this.Storage}  }
+ export function ch(){let t=this._listItems;/*  console.log(t); */  if(this.ackount.name){for(let item=0; item<=t.length-1;item++){if(t[item]===null){this.ackount.index='Btn-pw'+(item+1);   t[item]= this.ackount; return this.Storage}  }
 	 
  //this._listItems
  
@@ -34,13 +35,13 @@ this.echo(response);
 
 export function clearone(e){
 	 
-	 console.log(this.target.token)
+	 //console.log(this.target.token)
 if(this.target.token||this.target.name){	 
 let data={type:"uninstall-user",name:this.target.name,token:this.target.token,password:this.target.password}	 
 	 //this.ws.send(JSON.stringify(data));
 postData("DELETE",`${hosts}/logout`,data)	 
-let cw=this.target.index;console.log(cw)
-localStorage.removeItem(cw);let k=this._listItems.findIndex(i=> i?.index===cw);console.log(k)
+let cw=this.target.index;//console.log(cw)
+localStorage.removeItem(cw);let k=this._listItems.findIndex(i=> i?.index===cw);//console.log(k)
 this._listItems[k]=null;        return this.clickHandler() 
  }
 };
@@ -53,7 +54,8 @@ async function postData(xx,url = '', data = {}) {
     const response = await fetch(url, {
         method: xx, // *GET, POST, PUT, DELETE, etc.
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        headers: {Origin:'*',
+		mode: "cors",
+        headers: {Origin:url,
             'Content-Type': 'application/json'
             // 'Content-Type': 'application/x-www-form-urlencoded',
         },

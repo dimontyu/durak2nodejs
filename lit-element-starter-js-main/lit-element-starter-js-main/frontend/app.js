@@ -3,12 +3,12 @@ import {BordCount} from"./chat/autch.js"
 import {DurakGame,state} from './games/main.js';
 import {ws_player} from './chat/autch.js';
 import {MotionLit} from './logo/motion-l.js';
-let ws;
+var ws;
 
 var id_prosses;
 console.log(id_prosses);
 
-let rendersock =async (response) => {
+const rendersock =async (response) => {
     let r=response;
     const  [players_count, deck, active_suit, attacker, defender, players, suits, ranks, passes,target,usernames] = [r.players_count, r.deck, r.active_suit, r.attacker, r.defender, r.players, r.suits, r.ranks, r.passes,r.target,
 	r.usernames];
@@ -21,7 +21,7 @@ customElements.define('doom-arhitekt',DurakGame);
 
 };
 
-let logotyp=document.createElement('motion-lit');self.document.body.appendChild(logotyp);
+const logotyp=document.createElement('motion-lit');self.document.body.appendChild(logotyp);
 
 const start_game2=document.getElementById('start_game2')
 start_game2.addEventListener('click',async function(e){ws===undefined?await connect(2,e):null;})//каждая игра идет на своем path
@@ -36,7 +36,7 @@ stop_game.addEventListener('click',async function(e){
   {ws!==undefined?ws.close():null;}return 0})
 
 //игра начнеться когда все игроки ткнут соотв-ю кнопку
-let nav=document.querySelector(".nav");	
+const nav=document.querySelector(".nav");	
 
 
 //console.log(start_game)

@@ -30,7 +30,8 @@ Taks.bind(this);
 	let a=(this.passes===0);
 	let eho=(this._echo?.type==="round-taks");
 const styles=function(a,b,c){let s= {transform:`rotatez(${a}deg) translateY(${b}px) translateX(${c}px)`,
-	backgroundColor:'#673AB7',width:'fit-content'};
+	backgroundColor:'#673AB7',width:'fit-content',top: '16px',
+  left: '32px',};
 	return s };	
 const styl=function(a,b,c){let s= {transform:`rotatez(${a}deg) rotatex(${1}deg) translateY(${b}px) translateX(${c}px)`};
 	return s };		

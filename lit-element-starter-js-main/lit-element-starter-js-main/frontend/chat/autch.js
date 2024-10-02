@@ -65,6 +65,7 @@ this.autch_message=`you registered as ${e.name}`;
 }
 if(e.type=="susses" && !e.error){this.autch_message=`You are logged in as ${e.name}`;this.requestUpdate();}
 if(e.type=="susses" && e.error){this.autch_message=` ${e.error}`;this.requestUpdate();}
+if(e.type=="autorisation" && !e.token && e.error){this.autch_message=` ${e.error}`;this.requestUpdate();}
 
  }
 /*  2 Вызов */
@@ -103,7 +104,7 @@ this.ws1?this.ws1.addEventListener("message",this.echo1):null;
 
 	
 if(ev){let e=!(ev.data.result)?JSON.parse(ev.data):this.pre(ev.data);
-if(e?.install===true && this._listItems[0]){
+if(e?.install===true ){
 
 let u_s=e.users.map((i)=>{if(i!==e.id) return i})
 	
@@ -114,7 +115,12 @@ this._User=e.user;
  }  
   
 /*  Первый вызов  */
-get action(){let arr=[]; var yy=localStorage.getItem('no-autch'); for(let i=1;i<=3;i++){
+get action(){
+let arr=[];
+var yy=localStorage.getItem('no-autch');
+var xx=localStorage.getItem('Btn-pw1');
+
+ for(let i=1;i<=3;i++){
 	
 	var xx=localStorage.getItem('Btn-pw'+i);
 	var x1=localStorage.getItem('Btn-pw'+(i+1));
@@ -122,7 +128,8 @@ if((i && !xx)&&x1){if(JSON.parse(x1).token){x1?xx=x1:xx=yy;localStorage.setItem(
 //if((i===1 && !xx)&&!x1){xx=yy;}	
 
 	
-var x=xx?arr.push(JSON.parse(xx)):arr.push(null)
+var x=xx?arr.push(JSON.parse(xx)):arr.push(null);
+
 }return arr;};
 
 get target(){return this.ackount};

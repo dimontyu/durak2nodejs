@@ -4,8 +4,8 @@ const User = require('../models/user');
 const uuid = require('uuid');
 const init = require('./init');
 exports.login=async function(req,res,map) {
-    console.log(req.body.name)
-  const id = uuid.v4();
+    console.log(req.body.name, req.session.userId,req.cookies)
+    const id = req.session.userId??uuid.v4();
 
   console.log(`Updating session for user ${id}`);
     req.session.userId = id;
