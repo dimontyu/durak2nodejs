@@ -27,8 +27,11 @@ Taks.bind(this);
 //this.target=this.static_role.indexOf(this._myrole)
 	let [p_0,p_1,p_2,p_3]=[this._pos0,this._pos1,this._pos2,this._pos3]; 
     let q=this._myrole!=='observe'; 
-	let a=(this.passes===0);
+	
+	
 	let eho=(this._echo?.type==="round-taks");
+	let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,null):[null,null];//PRERENDER
+    let a=(this.passes===0);	
 const styles=function(a,b,c){let s= {transform:`rotatez(${a}deg) translateY(${b}px) translateX(${c}px)`,
 	backgroundColor:'#673AB7',width:'fit-content',top: '16px',
   left: '32px',};
@@ -51,7 +54,7 @@ function span_atr(x){let a=(x==="attacker")?span_1:(x==="defender")?span_2:null;
  
 let span_0=html`<span @click=${Taks} class="mod" style="bottom:32px;left: 104%;position: relative;">${!a?iy_text:ix_text}</span>`;
 
-let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,null):[null,null];//PRERENDER	
+//let[p_p,rb]=this._echo?.type&&!eho?Prerender.call(this,null):[null,null];//PRERENDER	
 let n=this.players_count;	
 let LEFT=(n>=3)?Img.call(this,this._pos2,'l'):null;
 

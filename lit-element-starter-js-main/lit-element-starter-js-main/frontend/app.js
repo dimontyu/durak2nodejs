@@ -48,7 +48,7 @@ async function connect(path,e) {
   e.target.classList.add('itarget')
 
 //ws = new WebSocket(`ws://localhost:8765/${path}`);
-let zn=window.location.hostname==='localhost'?'ws://localhost:8001':'wss://chatroom.na4u.ru'
+let zn=window.location.hostname==='localhost'?'ws://localhost:8001':'wss://cheroom.ru'
 ws = new WebSocket(`${zn}/${path}`);
 
  ws.onopen=async function open(e) {
