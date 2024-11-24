@@ -32,9 +32,20 @@ export const styles = [
     font-size: 10vw;
     text-align: center;
     will-change: transform;
-   background: linear-gradient(250deg, rgb(0 188 212 / 81%) 0%, #FF9800 35%, #e91e54 100%);
+   color: linear-gradient(250deg, rgb(0 188 212 / 81%) 0%, #FF9800 35%, #e91e54 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: #00000040;
+    }
+	
+	.letter3 {
+     flex: 1;
+    font-size: 10vw;
+    text-align: center;
+    will-change: transform;
+	margin-right: 0.2em;
+	-webkit-background-clip: content-box;
+     color: hsla(237deg 74% 33% / 61%) ;
+	position:relative;
     }
 
     .info {

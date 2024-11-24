@@ -168,6 +168,11 @@ h1, h2, h3, h4, h5, h6, p {
     transition: transform 250ms;
 }
 
+.card_img:hover {
+   
+    transform: scale(1.5);
+}
+
 .cards_number-lastCard {
     transform: rotate(-90deg);
     position: absolute;

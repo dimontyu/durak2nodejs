@@ -49,14 +49,14 @@ this.autch_message='hello world';
  ws1=ws_player?.ws;//порты игры
 
 echo(e){
-console.log(e.type)
+//console.log(e.type)
 
 if(e.type=="autorisation" && e.token){//let l_i=localStorage.getItem(e.index)
 //let x=JSON.parse(l_i);x.token=e.token;let y=JSON.stringify(x);
 let y=JSON.stringify(e)
-console.log(e.index)
+//console.log(e.index)
 //console.log(x)
-console.log(this)
+//console.log(this)
 localStorage.setItem(e.index,y);
 this.autch_message=`you registered as ${e.name}`;
 
@@ -87,7 +87,7 @@ data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
  router_echo1.call(this,e)
  }
   
-pre(e){if( e.token){console.log(e);
+pre(e){if( e.token){//console.log(e);
 let l_i=localStorage.getItem('Btn-pw1')
 let l_j=localStorage.getItem('no-autch')
 	
@@ -98,7 +98,7 @@ let x=JSON.parse(l_i??l_j);x.token=e.token;e?.password?x.password=e?.password:nu
 l_i?localStorage.setItem('Btn-pw1',y):localStorage.setItem('no-autch',y);}
 };
 
-async ws_plinstall(ev){console.log(ev.data)
+async ws_plinstall(ev){//console.log(ev.data)
 this.ws1=ws_player?.ws??null;
 this.ws1?this.ws1.addEventListener("message",this.echo1):null;
 

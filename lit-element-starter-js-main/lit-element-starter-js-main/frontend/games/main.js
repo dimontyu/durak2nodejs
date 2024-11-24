@@ -134,8 +134,8 @@ get foo(){return this.my_img;}
 
 // рендер for Render
  render(round){
-	 const body=Render.call(this,html,styleMap);
-	return html`${body}`;
+	
+	return Render.call(this,html,styleMap) ;
 };
 
 

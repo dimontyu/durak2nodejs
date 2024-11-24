@@ -6,8 +6,8 @@ let Game_connekt = require('../game/du');
 exports.message = async function (ws, message, WebSocket, wss, userId, map, Game, path) {
     let MSG = JSON.parse(message);
     let type = MSG?.type;
-    console.log(Game?.size)
-    console.log(path)
+   // console.log(Game?.size)
+   // console.log(path)
 
     switch (type) {
         case 'chat':
@@ -18,7 +18,7 @@ exports.message = async function (ws, message, WebSocket, wss, userId, map, Game
             break;
        
         case 'hi':
-            let msg = JSON.stringify({ "id": userId, connect: "connect" });
+            let msg = JSON.stringify({ "id": userId, connect: path });
             ws.send(msg.toString());
 
             break;

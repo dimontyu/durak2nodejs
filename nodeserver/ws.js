@@ -9,7 +9,7 @@ const {WebSocket, WebSocketServer } = require('ws');
 const autch = require('./autch/autch');
 const register = require('./autch/registration');
 const init = require('./autch/init');
-const connect=require('./connect');
+const Connect=require('./connect');
 //import WebSocket, { WebSocketServer } from 'ws';
 const bodyParser = require('body-parser');
 function onSocketError(err) {
@@ -101,7 +101,7 @@ server.on('upgrade', function (request, socket, head) {
 
 
 
-wss.on('connection', function (ws,request) {connect.connect(WebSocket,wss,ws,map,request)})
+wss.on('connection', function (ws,request) {Connect.connect(WebSocket,wss,ws,map,request)})
 
 
 

@@ -304,53 +304,39 @@ h1, h2, h3, h4, h5, h6, p {
 
 .cards_number-6-hover:hover {
     box-shadow: 0px 0px 10px yellow;
-	 transform: translateY(-20px);
+	 transform: translateY(-20px) scale(1.5); ;
 }
 
 .cards_number-6-hover:nth-of-type(1):hover {
-    transform: rotate(-35deg) translateY(-20px);
+	 box-shadow: 0px 0px 10px yellow;
+    transform: rotate(-35deg) translateY(-20px) scale(1.5);
 }
 
 .cards_number-6-hover:nth-of-type(2):hover {
-    transform: rotate(-20deg) translateY(-20px);
+	 box-shadow: 0px 0px 10px yellow;
+    transform: rotate(-20deg) translateY(-20px) scale(1.5) ;
 }
 
 .cards_number-6-hover:nth-of-type(3):hover {
-    transform: rotate(-5deg) translateY(-20px);;
+	 box-shadow: 0px 0px 10px yellow;
+    transform: rotate(-5deg) translateY(-20px) scale(1.5);
 }
 
 .cards_number-6-hover:nth-of-type(4):hover {
-    transform: rotate(5deg) translateY(-20px);
+	 box-shadow: 0px 0px 10px yellow;
+    transform: rotate(5deg) translateY(-20px) scale(1.5);
 }
 
 .cards_number-6-hover:nth-of-type(5):hover {
-    transform: rotate(20deg) translateY(-20px);
+	 box-shadow: 0px 0px 10px yellow;
+    transform: rotate(20deg) translateY(-20px) scale(1.5) ;
 }
 
 .cards_number-6-hover:nth-of-type(6):hover {
-    transform: rotate(35deg) translateY(-20px);
+	 box-shadow: 0px 0px 10px yellow;
+    transform: rotate(35deg) translateY(-20px) scale(1.5);
 }
 
-/* .cards_number-5:nth-of-type(1) {
-    transform: rotate(-30deg);
-}
-
-.cards_number-5:nth-of-type(2) {
-    transform: rotate(-15deg);
-}
-
-.cards_number-5:nth-of-type(3) {
-    top: 35px;
-    left: 200px;
-}
-
-.cards_number-5:nth-of-type(4) {
-    transform: rotate(15deg);
-}
-
-.cards_number-5:nth-of-type(5) {
-    transform: rotate(30deg);
-} */
 
 .move-to-0 {
     transform: translateX(20px)

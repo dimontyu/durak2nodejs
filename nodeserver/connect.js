@@ -12,7 +12,7 @@ exports.connect = function (WebSocket, wss, ws, map, request) {
 	const { pathname } = parse(request.url);
 	var Game;
 
-	console.log(pathname);
+	//console.log(pathname);
 	switch (pathname) {
 		case '/2':
 			Game2.add(userId); Game = Game2;

@@ -5,7 +5,7 @@ const g0 = ['H', 'T', 'M','L',"5","-",'G','A','M','E','S'];
 const g00 = ['D', 'U', 'R','A',"K","-",'G','A','M','E'];
 const simbol_card = ['diamonds', 'clubs', 'hearts','spades'];
 const number_card = ['6', '7', '8','9','10','J','Q','K','A'];
-
+const eventm = new Event("more");
 /* on----------------------------------------------- *//* --------------------------------class MotionLit*/ 
 export class MotionLit extends LitElement {
   static properties = {
@@ -28,7 +28,7 @@ controller = new AnimateController(this, {
   constructor() {
     super();
 	this.a=false;
-    this.addEventListener('click', () => {this.clickHandler(this.a),false});
+    this.addEventListener('click', () => {this.clickHandler(),false});
     this.letters = this.logo;
 	this.count=0;
   }
@@ -52,10 +52,10 @@ logotext(delayTime){return html`
 delaycard(i,count){return `./img/${(simbol_card[count])+number_card[i]}.png`}
 /* ----------------------------------------------- */
 
-logocards(delayTime){ return html`
+logocards(delayTime){this.shadowRoot?.querySelector(".letter3")?.dispatchEvent(eventm);  return html`
       ${this.letters?.map(
         (letter, i) => html`<span id='${(simbol_card[this.count])+number_card[i]}'
-            class=${i>5?"letter3":"letter3"}
+            class=${i>5?"letter3":"letter3"} @more=${handleEvent}
 			style='background-image:url(${this.delaycard(i,this.count)});background-size: cover;'
             ${animate({
               keyframeOptions: {
@@ -79,9 +79,8 @@ logocards(delayTime){ return html`
     return this.logocards(delayTime)
   }
 /* ----------------------------------------------- */
-  clickHandler(a) {
-	  //this.a=this.a?false:true;
-	  this.a=a===false;
+  clickHandler() {
+	  this.a=this.a?false:true;
     if (this.controller.isAnimating) {
       //this.controller.togglePlay();
 	 this.a?this.controller.pause():this.controller.play();;
@@ -104,6 +103,38 @@ logocards(delayTime){ return html`
 customElements.define('motion-lit', MotionLit);
 /* ----------------------------------------------- */
 
+function handleEvent(ev){
+
+let set1 = 0;
+let scale1 = 1;	
+ev.target.getAnimations().forEach(function (animation) {
+  console.log(animation.id);
+  ev.target.textContent=`${animation.id}`
+}),
+/* -- document.querySelector("#start_game3")*/			
+[start_game2,start_game3,start_game4].forEach((i)=>{
+i.addEventListener("click", (event) => {
+set1=50-set1;
+scale1=3.5-scale1;	
+const animation = event.target.animate(
+  [
+    //{ color: "#431236", offset: 0.233 },{ color: "red", offset: 0.444 },
+	{ transform: "scale(1.5) translate(10%,10%)",color: "#431236",offset: 0.133 },
+	{ transform: "scale(1.5) translate(20%,10%)",color: "red",offset: 0.333 },
+	{ transform: "scale(1.5) translate(30%,10%)",offset: 0.533 },
+    { transform: `scale(${scale1}) translate(${set1}%)`,},
+  ],{ duration: 3000, fill: "forwards",iterations: 1, }
+);
+animation.id=`buttons`;  
+  
+animation.onfinish = (event_animate) => {event.target.textContent=`${event.clientX}${event_animate.target.id}`; },animation.commitStyles();		
+})
+}),
+/* -- */	
+//ev.target.textContent=`${ev.target.animate.id}`,
+false,
+ev.preventDefault()
+};
 
 //fill: "forwards" fill: "backwards"
 

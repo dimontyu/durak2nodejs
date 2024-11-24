@@ -1,4 +1,4 @@
-
+ "use strict";
 import {BordCount} from"./chat/autch.js"
 import {DurakGame,state} from './games/main.js';
 import {ws_player} from './chat/autch.js';
@@ -6,13 +6,10 @@ import {MotionLit} from './logo/motion-l.js';
 var ws;
 
 var id_prosses;
-console.log(id_prosses);
+//console.log(id_prosses);
 
 const rendersock =async (response) => {
     let r=response;
-    const  [players_count, deck, active_suit, attacker, defender, players, suits, ranks, passes,target,usernames] = [r.players_count, r.deck, r.active_suit, r.attacker, r.defender, r.players, r.suits, r.ranks, r.passes,r.target,
-	r.usernames];
-
 state.r=r;state.ws=ws;
 ws_player.ws=ws;
 customElements.define('doom-arhitekt',DurakGame);
@@ -20,29 +17,23 @@ customElements.define('doom-arhitekt',DurakGame);
 
 
 };
+self.onerror=(e)=>console.log(e)
 
+var slow=["двоем","троем","четвером"]
+var uau=()=>{return ws?.readyState===WebSocket.CLOSED};
 const logotyp=document.createElement('motion-lit');self.document.body.appendChild(logotyp);
-
-const start_game2=document.getElementById('start_game2')
-start_game2.addEventListener('click',async function(e){ws===undefined?await connect(2,e):null;})//каждая игра идет на своем path
-
-const start_game3=document.getElementById('start_game3')
-start_game3.addEventListener('click',async function(e){ws===undefined?await connect(3,e):null})
-const start_game4=document.getElementById('start_game4')
-start_game4.addEventListener('click',async function(e){ws===undefined?await connect(4,e):null;})
-const stop_game=document.getElementById('stop_game')
+/* document.querySelector("#stop_game") */
 stop_game.addEventListener('click',async function(e){
   if(window.confirm("Вы действительно хотите выйти?"))
-  {ws!==undefined?ws.close():null;}return 0})
-
+  {ws!==undefined?[ws.close(),Buttons().forEach((i,index)=>{i.style.display='block',i.removeAttribute('disabled'),i.classList.remove('itarget'),i.textContent=`Игра в ${slow[index]}`})]:null;}return 0});
 //игра начнеться когда все игроки ткнут соотв-ю кнопку
+Buttons().forEach((start_game,i)=>{start_game.addEventListener('click',async function(e){ws===undefined||uau()?await connect(i+2,e):null;})})//каждая игра идет на своем path
+
+
 const nav=document.querySelector(".nav");	
+var Button_index;
 
-
-//console.log(start_game)
 async function connect(path,e) {
-
- let prBar=document.querySelector(".btn")
   e.target.style.backgroundColor='green';
   e.target.textContent='player wait';
   e.target.classList.add('itarget')
@@ -57,19 +48,7 @@ ws = new WebSocket(`${zn}/${path}`);
     ws.send(JSON.stringify({
         "type": "hi",
     }));
-	
-	
-//autorisation	
-/*let l_s=localStorage.getItem('btn-pw1');
-let j_s=l_s?JSON.parse(l_s):null;
-let username=j_s?j_s.name:"gamer";	
-	
-let init=JSON.stringify({type:"init",name:username});
-
-ws.send(init);*/
-sent()
-    //sent(path)
-    
+	sent()
   };
 
 
@@ -77,17 +56,22 @@ sent()
    
  let response = JSON.parse(e.data);
 
-    if((response.id&&!id_prosses)){id_prosses=response.id;//console.log(id_prosses);
+    if((response.id&&!id_prosses)){id_prosses=response.id;
     
     }
     
     if((response?.deck_id)&&id_prosses){
    
     await rendersock(response);}
-    if(response.connect){let n=Number(response.connect);let buttons=[start_game2,start_game3,start_game4]
-    buttons.forEach((i,index)=>{if(index===(n-2)){i.textContent=`PLAYERS${n}`;i.style.color='#3bff67';i.classList.remove('itarget')}i.setAttribute('disabled',true)});nav.setAttribute("hidden",true);nav.style.display='none';logotyp.remove();
+    if(response.connect){let n=Number(response.connect);console.log(n);let buttons=Buttons();
+    buttons.forEach((i,index)=>{if(index===(n-2)){i.textContent=`PLAYERS${n}`;i.style.color='#3bff67';Button_index=index}i.setAttribute('disabled',true);})
+	
+setInterval(()=>{
+buttons[0]?[buttons[Button_index]!==buttons[buttons.length-1]?buttons[buttons.length-1].style.display='none':null,buttons.pop()]:clearInterval(this);
+     
+    }, 2000)
     }
-    
+     if(response.usernames){nav.setAttribute("hidden",true);nav.style.display='none';logotyp.remove();}
   };
 
   ws.onclose= async function close(e) {
@@ -111,7 +95,34 @@ sent()
 }))}
 
 }
+function handleEvent(){
+
+let set1 = 0;
+let scale1 = 1;	
+
+/* -- document.querySelector("#start_game3")*/			
+Buttons().forEach((i)=>{
+i.addEventListener("click", (event) => {
+set1=50-set1;
+scale1=3.5-scale1;	
+const animation = event.target.animate(
+  [
+    //{ color: "#431236", offset: 0.233 },{ color: "red", offset: 0.444 },
+	{ transform: "scale(1.5) translate(10%,10%)",color: "#431236",offset: 0.133 },
+	{ transform: "scale(1.5) translate(20%,10%)",color: "red",offset: 0.333 },
+	{ transform: "scale(1.5) translate(30%,10%)",offset: 0.533 },
+    { transform: `scale(${scale1}) translate(${set1}%)`,},
+  ],{ duration: 3000, fill: "forwards",iterations: 1, }
+);
+animation.id=`buttons`;  
+  
+animation.onfinish = (event_animate) => {nav.style.display!=="none"&&animation.commitStyles()}		
+})
+})
+
+};
+handleEvent();
+function Buttons(){return Array(start_game2,start_game3,start_game4)}
 
 
-//window.addEventListener("message",function(e){console.log(e.data)})
 
