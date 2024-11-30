@@ -10,7 +10,6 @@ const autch = require('./autch/autch');
 const register = require('./autch/registration');
 const init = require('./autch/init');
 const Connect=require('./connect');
-//import WebSocket, { WebSocketServer } from 'ws';
 const bodyParser = require('body-parser');
 function onSocketError(err) {
   console.error(err);
@@ -58,7 +57,7 @@ app.post('/login', (req,res)=> autch.login(req,res,map));
 app.delete('/logout',(req,res)=> autch.logout(req,res,map));
 app.post('/lg', (req,res)=> autch.loginGET(req,res));
 app.post('/register',(req,res)=> register(req,res));
-//app.post('/init', cors(), jsonParser, function (req, res) { init(req, res) });
+
 
 var dev_db_url =process.env.MONGODB_URI;
 var LmongoDB = 'mongodb://localhost:27017/durak';

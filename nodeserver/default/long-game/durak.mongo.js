@@ -1,4 +1,6 @@
 'use strict'
+//не используеться использовать du.game.js
+
 let DurakGame=require('./durak');
 let Durak = require('../models/game.ex');
 const User = require('../models/user');

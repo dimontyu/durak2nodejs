@@ -2,11 +2,11 @@
 let DurakGame = require('./durak');
 const User = require('../models/user');
 const uuid = require('uuid');
-let Game_game = require('./du.game');
+const Player=require('./player');
 module.exports = async function (userId, map, Game, path) {
-	let jjj = new DurakGame(path);
+	let durak = new DurakGame(path);
 	const name_id = uuid.v4();//id- game example
-	let exg = jjj.play_game();
+	let exg = durak.play_game();
 	exg.name = name_id;
 	let y1 = await User.find({ session_id: userId});
 	let y=y1.length>1?((y1[0].name==="GamerX")?y1[1]:y1[0]):y1[0];
@@ -20,24 +20,7 @@ module.exports = async function (userId, map, Game, path) {
 	exg.cach = [[], [], [], []];
 	exg.deck_back = [];
 	exg.roles = exg.pl_roles;
-	
-	let i = 0;
-	for (const item of D_id) {
-
-		exg.id = item;
-		exg.target = i;
-
-		let msg = JSON.stringify(exg);
-		let client = map.get(item);
-		client.on('message', function (message) { Message(message, map, exg) });
-		client.on('close', function () { exg = null; jjj = null; });
-		client ? client.send(msg.toString()) : null;
-
-		i += 1
-
-
-
-	}
+	let player=new Player(exg,D_id,map);
 	
 };
 
@@ -64,13 +47,3 @@ async function sort(Game, usr, uid, path) {
 
 }
 
-function Message(message, map, durak) {
-	let MSG = JSON.parse(message);
-	let type = MSG?.type;
-	if (type === 'set' && durak !==null) {
-		Game_game(MSG, map, durak);
-	}
-	if (type === 'set' && durak === null) {
-		console.log("GAME OVER");
-	}
-}
