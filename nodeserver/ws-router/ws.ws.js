@@ -14,8 +14,10 @@ exports.message = async function (ws, message, WebSocket, wss, userId, map, Game
             //ChatGame(wss, ws, WebSocket, userId, MSG);
             ChatGame(wss, map, ws, WebSocket, userId, MSG);
             break;
-        case 'start': Game?.size >= path ? Game_connekt(userId, map, Game, path): null;
+        case 'start': Game?.size >= path ? Game_connekt(userId, map, Game, path,false):huis_bot(ws);
             break;
+		case 'start-bot':startBot(userId, map, Game, path);
+            break;	
        
         case 'hi':
             let msg = JSON.stringify({ "id": userId, connect: path });
@@ -27,3 +29,16 @@ exports.message = async function (ws, message, WebSocket, wss, userId, map, Game
             return 0;
     };
 };
+
+function huis_bot(ws){
+	
+	 let msg = JSON.stringify({ "bot": 'hu is' });
+      ws.send(msg.toString());
+	
+	
+	
+};
+
+function startBot(userId, map, Game, path){let a=Game;a.add('bot2');
+
+		Game_connekt(userId, map,a, path,true)}

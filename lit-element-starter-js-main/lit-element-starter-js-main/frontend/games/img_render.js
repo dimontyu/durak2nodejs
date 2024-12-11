@@ -18,8 +18,8 @@ import {positing}from './positing.js';
               duration: 1000,
 			   fill: 'backwards',
             },
-            in:fly[3] ,
-            out:fly[2],
+            in:fly[0] ,
+            out:fly[3],
           });
 		  
 const styles=function(ww,ps,p){
@@ -56,7 +56,7 @@ function sort(sw,x){
 let a=this._a;
 let m=[];	
 //найти индекс хода для позиции пары  
-let index=a.map((item,i,r)=>{if((item[0])===(x[0])&&(item[1])===(x[1]))return i}).filter((i)=>i!==undefined)[0]
+let index=a.map((item,index,r)=>{if((item[0])===(x[0])&&(item[1])===(x[1]))return index}).filter((i)=>i!==undefined)[0];console.log(index);
 //нормализация стилей карт	
 positing.forEach((pos,i,as)=>	
 {if(ii&&(sw===pos.transform)){m.push(as[index].transform);/* console.log('ii&&(sw===pos.transform)'); */return }

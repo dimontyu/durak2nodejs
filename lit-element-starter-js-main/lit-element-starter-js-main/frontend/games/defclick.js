@@ -25,7 +25,7 @@ let pos_number=(this._pos2===Number(this._echo.players))||(this._pos3===Number(t
    //console.log(`wm4.get(broken_card:${wm4.get(broken_card)}`)
    //console.log(this._pos2===Number(this._echo.players))
    
-this.konduktor.deff()  
+//this.konduktor.deff()  
    
   this.cash[j].push(this.players[j][k]);
   
@@ -42,22 +42,25 @@ let my_card=this.players[j][k];
 
 
 let a_cards=this.konduktor.get_aktive();
-
-let result=a_cards.map((i,index)=>{
+let zerro=false;
+let result=a_cards.map((i,index,A)=>{
     let e1=(my_card[0]===i[0]);//проверяем соответствие карт
     let e2=this.ranks.indexOf(my_card[1]);
     let e3=this.ranks.indexOf(i[1]);
     let e4=(my_card[0]===this.active_suit);
     let e5=(i[0]!==this.active_suit);
-    
+    if(zerro===false){
     if((e1&&(e2>e3))||(e4&&e5)){
-    let v=a_cards.indexOf(i);// console.log(`v:${v}`)
-    a_cards.splice(v,1);
+    //let v=a_cards.indexOf(i);
+	let v=A.indexOf(i);
+	// console.log(`v:${v}`)
+    //a_cards.splice(v,1);
+	A.splice(v,1)
     
     
 	this.konduktor.set_back(i,my_card,this.passes-1)
- 
-    return 'back'}})
+ zerro=true;
+    return 'back'}}})
 //console.log(result);
 
 if ((result.includes('back'))){return true;}//если все Ок промис труе отправляем сокет с данными

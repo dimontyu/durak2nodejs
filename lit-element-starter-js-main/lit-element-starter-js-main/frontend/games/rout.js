@@ -62,7 +62,7 @@ else{this._myrole="defender"}
 }
 this.static_role[this._pos0]=this._role[0]??null;
 this.static_role[this._pos1]=this._role[1]??null;
-this._round +=1 ;this._echo=e;
+this._round +=1 ;this._echo=e;this.w_m={"res":this.static_role}
 	 }
 if(this.players_count===3){	
 	
@@ -127,7 +127,7 @@ this.static_role[this._pos2]=this._role[2]??null;
 this._round +=1 ;
 this._echo=e;
 //console.log(this._role);
-	  
+this.w_m={"res":this.static_role}	  
 }if(this.players_count===4){
 //["attacker2", "attacker2", "attacker", "defender"]
 //['defender', 'attacker2', 'attacker2', 'attacker']

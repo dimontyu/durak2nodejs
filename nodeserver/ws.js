@@ -13,6 +13,9 @@ const Connect=require('./connect');
 const bodyParser = require('body-parser');
 function onSocketError(err) {
   console.error(err);
+};
+function handleError(err) {
+  console.error(err);
 }
 
 const app = express();
