@@ -52,11 +52,11 @@ let result=a_cards.map((i,index,A)=>{
     if(zerro===false){
     if((e1&&(e2>e3))||(e4&&e5)){
     //let v=a_cards.indexOf(i);
-	let v=A.indexOf(i);
+	//let v=A.indexOf(i);?//
 	// console.log(`v:${v}`)
     //a_cards.splice(v,1);
-	A.splice(v,1)
-    
+	//A.splice(v,1)??//
+    A.splice(index,1)
     
 	this.konduktor.set_back(i,my_card,this.passes-1)
  zerro=true;
