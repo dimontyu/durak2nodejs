@@ -18,7 +18,7 @@ function sort_card2(){this.konduktor.get_aktive().forEach((i,index,a)=>
 if(this._myrole==="defender"){
  this.konduktor.set_aktive(this.players[j][k])	 
  };
-if(e.role==='defender'){wm2.set(p_p,rb);}	
+	
 if(this._myrole==="attacker2" || this._myrole==="attacker"){	
  xx?sort_card2.call(this):null;
 } 

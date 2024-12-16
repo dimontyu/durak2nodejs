@@ -35,11 +35,9 @@ async function update(a, b, ps, map, msg, Durak,bot) {
 
     game.cach[a].push(game.players[a][b]);
     game.players[a][b] = null;
-    bot?null:game.passes = ps;
-if(bot&&msg?.role==="defender"&&bot._myrole==='defender'){map[0].send(JSON.stringify(msg).toString())
-	}if(bot&&msg?.role==="attacker"&&bot._myrole==='attacker'){map[0].send(JSON.stringify(msg).toString())
-	}
- else if(!bot){ game.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(JSON.stringify(msg).toString()) : null })}
+    game.passes = ps;
+if(bot){map[0].send(JSON.stringify(msg).toString())}
+ else  { game.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(JSON.stringify(msg).toString()) : null })}
 
 
 
@@ -51,8 +49,7 @@ async function defender_main(t, ui, map, msg, Durak,bot) {
 
     
     let game = Durak;
-	game.passes=0;
-bot?bot.konduktor.clearAll():null;
+
     for (let ie = 0; ie <= (game.players_count - 1); ie++) {
         game.players[ie] = await sortdek(game.players[ie])
         // for( let i of game.cach[ie]){game.players[ui].push(i)};
@@ -68,16 +65,13 @@ bot?bot.konduktor.clearAll():null;
 
     let gam_n = game; //console.log(result);
     let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': false });
-	if(bot){map[0].send(response.toString());bot._myrole==='attacker'?bot.start():null}
+	if(bot){map[0].send(response.toString());bot.start()}
   else  {gam_n.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(response.toString()) : null })}
 
 }
 async function attaker_main(t, u, map, msg, Durak,bot) {
     
     let game = Durak;
-	game.passes=0;
-bot?bot.konduktor.clearAll():null;
-	
     let num = game.players.length;
     for (let ie = 0; ie <= num - 1; ie++) {
 

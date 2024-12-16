@@ -14,7 +14,7 @@ exports.message = async function (ws, message, WebSocket, wss, userId, map, Game
             //ChatGame(wss, ws, WebSocket, userId, MSG);
             ChatGame(wss, map, ws, WebSocket, userId, MSG);
             break;
-        case 'start': (Game?.size >= path)? Game_connekt(userId, map, Game, path,false):path===2 ?huis_bot(ws):null;
+        case 'start': Game?.size >= path ? Game_connekt(userId, map, Game, path,false):huis_bot(ws);
             break;
 		case 'start-bot':startBot(userId, map, Game, path);
             break;	

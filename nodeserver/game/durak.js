@@ -21,7 +21,7 @@ function shuffle(array) {
 
 
 
-class DurakGame{
+module.exports = class DurakGame{
     constructor(players_count){
         this.players_count = players_count
         this.deck = []
@@ -76,7 +76,7 @@ class DurakGame{
        return this.s()//кидаем козыря 
 	 }	
 
-   async start_game(){
+    start_game(){
         this.create_deck()//собираем колоду
         this.shuffle_deck()//тасуем карты
         this.deal_cards()//раздаем карт
@@ -136,8 +136,8 @@ class DurakGame{
 		}
         else return "attacker2" 
 	}
-   async play_game(){
-       await this.start_game()
+    play_game(){
+        this.start_game()
       
 	//return JSON.stringify(this)
 	return this
@@ -148,4 +148,3 @@ class DurakGame{
 //let jjj=new DurakGame(4);
 
 //console.log(jjj.play_game())		
-module.exports =DurakGame;

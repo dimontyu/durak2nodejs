@@ -7,7 +7,7 @@ module.exports = async function (userId, map, Game, path,botj) {
 	let durak = new DurakGame(path);
 	//let bot=botj?new Bot(durak):null;
 	const name_id = uuid.v4();//id- game example
-	let exg = await durak.play_game();
+	let exg = durak.play_game();
 	exg.name = name_id;
 	let y1 = await User.find({ session_id: userId});
 	let y=y1.length>1?((y1[0].name==="GamerX")?y1[1]:y1[0]):y1[0];
