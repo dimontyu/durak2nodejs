@@ -95,7 +95,7 @@ bot?bot.konduktor.clearAll():null;
     }
     let gam_n = game; //console.log(result)
     let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true });
-	if(bot){map[0].send(response.toString());bot._myrole==='attacker'?bot.start():null}
+	if(bot){map[0].send(response.toString()); bot._myrole==='defender'?bot.start():null }
   else { gam_n.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(response.toString()) : null })}
 }
 
