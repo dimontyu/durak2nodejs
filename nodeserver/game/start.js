@@ -10,7 +10,7 @@ let Durak=this.durak;
 let m_role=this._myrole;
 let tg=this.durak.target;
 
-let k=(Durak.passes!==0)&&(m_role==='attacker')?filterAttach.call(this,Durak.players[tg]):1;
+let k=(Durak.passes!==0)&&(m_role==='attacker')?filterAttach.call(this,Durak.players[tg]):filterAttach0.call(this,Durak.players[tg]);
 
 console.log(`k:${k}`);
 
@@ -29,9 +29,9 @@ roles:Durak.roles};
 let message=JSON.stringify(Mess);
 this.konduktor.setAktive=Durak.players[tg][k];	
 //await this.Message(message,this.map,Durak);
-Durak.passes!==0?await Game_game(Mess,this.map, Durak,this):await this.Message(message,this.map,Durak);;
+Durak.passes!==0?await Game_game(Mess,this.map, Durak,this):await Game_game(Mess,this.map, Durak,this);
 	
-}if(k===false){let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, Durak,this)	} 
+}if(k===false){await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, Durak,this)	} 
 	 
 
 };
@@ -56,6 +56,20 @@ if(result!==-1){A=is;break}
 return A;	
 	
 };//npm start
+
+
+function filterAttach0(Dur_ple){
+let A=false;	
+for(let is=0;is<=Dur_ple.length-1;is++){
+//console.log(`Dur_ple:${Dur_ple[is]}`);	
+if(Dur_ple[is]){A=is;break}	
+}
+console.log(`result:${A}`);	
+return A;	
+}	
+//A?this.konduktor.setktive=Dur_ple[A]:null;	
+
+
 
 
 

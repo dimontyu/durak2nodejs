@@ -36,8 +36,9 @@ async Message(message, map, durak) {
 	let u=durak.players[players][pos];
 	this.konduktor.setback=u;
 	console.log(durak.players[durak.target])
-	await this.start();
-	return await Game_game(MSG, map, durak,this);//this.clients();
+	await Game_game(MSG, map, durak,this)
+	await this.start(MSG);
+	//return await Game_game(MSG, map, durak,this);//this.clients();
 	
 	}
 	if (type === 'set' && durak !==null&&MSG.taks) {
