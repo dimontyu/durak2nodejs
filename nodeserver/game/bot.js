@@ -17,7 +17,7 @@ this.map=[this.client];
 this.init()[0];
 this.init()[1];
 this.client.on('message',(message)=>{this.Message(message,this.map,this.durak)});
-this.client.on('close', function () { this.durak = null;});
+this.client.on('close', ()=>{ this.durak = null;this.konduktor=null;this.map=null});
 this._myrole==='attacker'?this.start():null;
 	};
 clients(){console.log(this.durak)};
@@ -26,7 +26,7 @@ async Message(message, map, durak) {
 	
 	this.init()[0];this.init()[1];
 	let MSG = JSON.parse(message);
-	console.log(MSG);
+	//console.log(MSG);
 (MSG?.res)?[this.durak.roles=MSG.res,this.init()[0],this.init()[1],this._myrole=this.durak.roles[this.durak.target]]:null;
 
 	let type = MSG?.type;
@@ -35,7 +35,7 @@ async Message(message, map, durak) {
 	let pos=MSG?.pos;
 	let u=durak.players[players][pos];
 	this.konduktor.setback=u;
-	console.log(durak.players[durak.target])
+	//console.log(durak.players[durak.target])
 	await Game_game(MSG, map, durak,this)
 	await this.start(MSG);
 	//return await Game_game(MSG, map, durak,this);//this.clients();
@@ -49,7 +49,7 @@ async Message(message, map, durak) {
 	let pos=MSG?.pos;
 	let u=durak.players[players][pos];
 	this.konduktor.setAktive=u;
-	console.log(durak.players[durak.target])
+	//console.log(durak.players[durak.target])
 	//await Game_game(MSG, map, durak,this);
 	await this.defstart(MSG);	
 	//await Game_game(MSG, map, durak,this);	
@@ -64,8 +64,8 @@ async Message(message, map, durak) {
  };
  init(){return [this.durak.attacker=this.durak.players[this.durak.roles.indexOf('attacker')],this.durak.defender=this.durak.players[this.durak.roles.indexOf('defender')]];}
  
-async start(msg){await astart.call(this,msg)};
-async defstart(msg){await defstart.call(this,msg)};
+async start(msg){try{await astart.call(this,msg)}catch(error){console.error(error);}};
+async defstart(msg){try{await defstart.call(this,msg)}catch(error){console.error(error);}};
 }
 
 

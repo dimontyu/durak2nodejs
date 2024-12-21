@@ -29,7 +29,7 @@ roles:Durak.roles};
 let message=JSON.stringify(Mess);
 this.konduktor.setAktive=Durak.players[tg][k];	
 //await this.Message(message,this.map,Durak);
-Durak.passes!==0?await Game_game(Mess,this.map, Durak,this):await Game_game(Mess,this.map, Durak,this);
+Durak.passes!==0? await Game_game(Mess,this.map, Durak,this):await Game_game(Mess,this.map, Durak,this);
 	
 }if(k===false){await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, Durak,this)	} 
 	 
@@ -39,19 +39,23 @@ Durak.passes!==0?await Game_game(Mess,this.map, Durak,this):await Game_game(Mess
 
 
 function filterAttach(Dur_ple){
+	
+	
 let A=false;	
 let a_cards=this.konduktor.Aktive;
 let b_cards=this.konduktor.Back;	
-let a_b=a_cards.concat(b_cards);console.log(a_b)
-let result=a_b.map(i=>{return i})	
+let a_b=a_cards.concat(b_cards);//console.log(a_b)
+let result=a_b.map(i=>{return i})
+	
 for(let is=0;is<=Dur_ple.length-1;is++){
 //console.log(`Dur_ple:${Dur_ple[is]}`);	
  result=a_b.findIndex((i,index)=>{if(Dur_ple[is]&&i){return i[1]==Dur_ple[is][1]}})
-console.log(`result:${result}`);	
+//console.log(`result:${result}`);	
 if(result!==-1){A=is;break}	
 	
 	
-}	
+}
+	
 //A?this.konduktor.setktive=Dur_ple[A]:null;	
 return A;	
 	
@@ -64,7 +68,7 @@ for(let is=0;is<=Dur_ple.length-1;is++){
 //console.log(`Dur_ple:${Dur_ple[is]}`);	
 if(Dur_ple[is]){A=is;break}	
 }
-console.log(`result:${A}`);	
+//console.log(`result:${A}`);	
 return A;	
 }	
 //A?this.konduktor.setktive=Dur_ple[A]:null;	

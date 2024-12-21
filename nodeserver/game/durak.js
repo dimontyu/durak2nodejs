@@ -137,10 +137,10 @@ class DurakGame{
         else return "attacker2" 
 	}
    async play_game(){
-       await this.start_game()
+       try{await this.start_game()
       
 	//return JSON.stringify(this)
-	return this
+	   return this}catch(error){console.error(error);}
 	} 
 
 }

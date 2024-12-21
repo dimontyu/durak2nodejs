@@ -17,7 +17,7 @@ module.exports = async function (msg, map, Durak,bot) {
 
     }
     if (msg?.taks && (msg.role === "attacker" || msg.role === "attacker2")) {
-        console.log("attaker")
+        //console.log("attaker")
         let t = Number(msg?.taks);
         let u = Number(msg?.players);
         return await attaker_main(t, u, map, msg, Durak,bot);
@@ -29,21 +29,28 @@ module.exports = async function (msg, map, Durak,bot) {
 
 
 async function update(a, b, ps, map, msg, Durak,bot) {
-    console.log(msg?.name)
-    let game = Durak;
+	try{let game = Durak;
+    if(game.players[a]){
+    
 
 
-    game.cach[a].push(game.players[a][b]);
-    game.players[a][b] = null;
-    bot?null:game.passes = ps;
-if(bot&&msg?.role==="defender"&&bot._myrole==='defender'){map[0].send(JSON.stringify(msg).toString())
-	}if(bot&&msg?.role==="attacker"&&bot._myrole==='attacker'){map[0].send(JSON.stringify(msg).toString())
+    game.cach[a]?.push(game.players[a][b]);
+     game.players[a][b] = null;
+    bot?null:game.passes= ps;
+if(bot&&msg?.role==="defender"&&bot._myrole==='defender'){setTimeout(() =>{map[0].send(JSON.stringify(msg).toString())
+},300)}if(bot&&msg?.role==="attacker"&&bot._myrole==='attacker'){setTimeout(() =>{map[0].send(JSON.stringify(msg).toString())},300)
 	}
  else if(!bot){ game.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(JSON.stringify(msg).toString()) : null })}
 
 
 
-    return 0;
+    return 0;}}
+	
+	 catch (error) {
+  console.error(error);
+  // Expected output: ReferenceError: nonExistentFunction is not defined
+  // (Note: the exact output may be browser-dependent)
+}
 
 }
 
@@ -68,7 +75,8 @@ bot?bot.konduktor.clearAll():null;
 
     let gam_n = game; //console.log(result);
     let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': false });
-	if(bot){map[0].send(response.toString());bot._myrole==='attacker'?bot.start():null}
+	if(bot){setTimeout(() =>{map[0].send(response.toString())},400);
+setTimeout(() =>{bot._myrole==='attacker'?bot.start():null},500)}
   else  {gam_n.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(response.toString()) : null })}
 
 }
@@ -95,7 +103,8 @@ bot?bot.konduktor.clearAll():null;
     }
     let gam_n = game; //console.log(result)
     let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true });
-	if(bot){map[0].send(response.toString()); bot._myrole==='defender'?bot.start():null }
+	if(bot){setTimeout(() =>{map[0].send(response.toString());
+	bot._myrole==='defender'?bot.start():null },400)}
   else { gam_n.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(response.toString()) : null })}
 }
 

@@ -32,9 +32,9 @@ role:m_role,
 broken_card:this.konduktor.broken_card,
 passes:Durak.passes,
 roles:Durak.roles};	
-		
+let m=this.map[0];		
 	
-this.map[0].send(JSON.stringify(Mess).toString())	
+setTimeout(() =>{m.send(JSON.stringify(Mess).toString())},300)	
 	
 	
 }
@@ -47,7 +47,7 @@ await Game_game(w_m,this.map, Durak,this);
 
 
 
-function filterDeffender(Dur_ple){
+/* function filterDeffender(Dur_ple){
 let A=false;	
 let a_cards=this.konduktor.Aktive;
 let b_cards=this.konduktor.Back;	
@@ -65,11 +65,9 @@ result=a_cards.findIndex((i,index)=>{if(Dur_ple[is]&&i){
 	w||rw?b_cards.push(i):null;
 	w||rw?this.durak.cach[this.durak.target].push(Dur_ple[is]):null;
 	w||rw?Dur_ple[is]=null:null;
-	return wew
-	                                                                                     }
-	                                                                                        });	 
- console.log(`a_cards:${a_cards}`);
-console.log(`result:${result}`);	
+	return wew}});	 
+ //console.log(`a_cards:${a_cards}`);
+//console.log(`result:${result}`);	
 if(result!==-1){A=is;break}	
 	
 	
@@ -77,7 +75,7 @@ if(result!==-1){A=is;break}
 //A?this.konduktor.setktive=Dur_ple[A]:null;	
 return A;	
 	
-};//np
+};//np */
 
 
 
@@ -89,7 +87,7 @@ let b_cards=this.konduktor.Back;
 
 //console.log(`a_cards:${a_cards}`)	
 
-//console.log(`a_cards:${a_cards}`);	
+
 let result0=Dur_ple.findIndex((item,is)=>{if(item&&att){
 	let w=(ranks.indexOf(att[1])<ranks.indexOf(item[1]))&&(att[0]===item[0]);
 	w?a_cards.splice(0,1):null;
@@ -97,12 +95,12 @@ let result0=Dur_ple.findIndex((item,is)=>{if(item&&att){
 	w?this.durak.cach[this.durak.target].push(item):null;
 	w?Dur_ple[is]=null:null;
 	
-	console.log(`a_cards:${a_cards}`);
-console.log(`result0:${w}`);
+	//console.log(`a_cards:${a_cards}`);
+//console.log(`result0:${w}`);
 	return w
-	                                                                                     }
-	                                                                                        });
-if(result0!==-1){A=result0;return A}
+	     }
+});
+if(result0!==-1){return result0;}
 else if(result0===-1){
 																							
 																							
@@ -116,16 +114,16 @@ let result1=Dur_ple.findIndex((item,is)=>{if(item&&att){
 	rw?this.durak.cach[this.durak.target].push(item):null;
 	rw?Dur_ple[is]=null:null;
 	
-	console.log(`a_cards:${a_cards}`);
-console.log(`result1:${rw}`);
-	return rw	                                                                                     }
-	                                                                                        });
-if(result1!==-1){A=result1;return A}
+	//console.log(`a_cards:${a_cards}`);
+//console.log(`result1:${rw}`);
+	return rw}
+});
+if(result1!==-1){return result1}
 }else
 																							
- console.log(`a_cards:${a_cards}`);
+ //console.log(`a_cards:${a_cards}`);
 console.log(`result:${'result:false'}`);	
-return A;	
+return Boolean(A);	
 	
 };//np
 
