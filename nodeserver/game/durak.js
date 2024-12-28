@@ -39,7 +39,9 @@ class DurakGame{
         this.id=''
         this.name=''
         this.usernames=[]
+		this.roles=[]
 		this.A()
+	    void (async()=>{await this.start_game()})()
 	};
 	
 	A(){for(let i=0;i<=this.players_count-1;i++){let a=[];this.players.push(a)}}
@@ -76,16 +78,32 @@ class DurakGame{
        return this.s()//кидаем козыря 
 	 }	
 
-   async start_game(){
+    async start_game(){
         this.create_deck()//собираем колоду
         this.shuffle_deck()//тасуем карты
         this.deal_cards()//раздаем карт
-        this.attacker = this.find_lowest_trump()//определяем кто первый ходит
-        this.defender = this.get_next_player(this.attacker)//под кого ходят
+        this.attacker =await this.find_lowest_trump()//определяем кто первый ходит
+        this.defender = await this.get_next_player(await this.attacker)//под кого ходят
+		if(await this.attacker&&await this.defender){
         for (let i=0;i<=this.players_count-1;i++){
             this.pl_roles.push(this.role_play(i))
         }
+		}
 	}
+	
+	 async game_game(){
+		this.players =[];
+		this.deck_back=[];
+
+		this.A()
+        
+        this.create_deck()//собираем колоду
+        this.shuffle_deck()//тасуем карты
+        this.deal_cards()//раздаем карт
+        
+	}
+	
+	
      s(){//console.log(this.deck)
         this.active_suit =this.deck[this.deck.length-1][0]
         let a=this.deck.pop()
@@ -94,7 +112,7 @@ class DurakGame{
 	 }
 
 
-    find_lowest_trump(){
+   async find_lowest_trump(){
        let lowest_trump = Infinity
        let lowest_trump_sublist = null
         
@@ -113,7 +131,7 @@ class DurakGame{
         return lowest_trump_sublist
 	}
 
-    get_next_player( current_player){
+   async get_next_player( current_player){
         let players = this.players//555
         let current_index = players.indexOf(current_player)
         return players[(current_index + 1) % players.length]

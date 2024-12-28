@@ -22,12 +22,16 @@ let i = 0;
 
 		let msg = JSON.stringify(durak);
 		let client = map.get(item);
+		if(this.bt){
 		client?null:this.bot=new Bot(durak);
 		client?Client=client:null;
+		client?client.on('close', ()=>
+		{ durak = null;this.bot.konduktor=null;this.bot.map=null;this.bot=null;}):null;
+		}
 		client ? client.send(msg.toString()) : null;
 		if(!this.bt){
 		client?client.on('message',(message)=>{this.Message(message,map,durak,this.bt )}):null;
-		client ?client.on('close', function () { durak = null;}):null;
+		client?client.on('close', function () { durak = null;}):null;
 		}
 i += 1
 
@@ -42,7 +46,8 @@ async Message(message, map, durak,bt) {
 	
 	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
 	if (type === 'set' && durak !==null) {
-	await Game_game(MSG, map, durak,bt);this.bot?.clients();
+	await Game_game(MSG, map, durak,bt);
+	//this.bot?.clients();
 	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
 	}
 	if (type === 'set' && durak === null) {

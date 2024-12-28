@@ -1,26 +1,53 @@
 const ranks= ["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 const suits= ["Ch", "B", "K", "P"];
 
-
+const gameover=require('./gameover');
 const Game_game = require('./du.game');
 
 
 async function defstart(msg){
-let Durak=this.durak;	
-let m_role=this._myrole;
-let tg=this.durak.target;
+let Durak=this.durak;
+let tg=Durak.target;
+let dbl=Durak.deck.length===0;
+let a =msg?Number(msg?.players):null;
+let b =msg?Number(msg?.pos):null;
+let ps =msg?Number(msg?.passes):null;
+//let fp=msg&&Durak.players[a].filter(i=>i!==null);
+let tp=Durak.players[tg].filter(i=>i!==null);
+let idx=Durak.roles.indexOf('attacker');
+let fps=()=>{return Durak.players[idx].filter(i=>i!==null)};
+let fp=msg?Durak.players[a].filter(i=>i!==null):fps();
+let m_role=this._myrole;		
+//console.log(tp)
+dbl?console.log(fp):null
+dbl?console.log(tp):null
+	
+
+if((fp.length===1 || tp.length===0)&&dbl){
+	
+    if(fp.length===1){await gameover.call(this);console.log('game dover1');
+	    let w_m={type:"set","taks":`${tg}`,"players":idx,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit};
+        await Game_game(w_m,this.map, Durak,this)
+	    return 0;}
+	else{await gameover.call(this);console.log('game dover2');
+	    let w_m={type:"set","taks":true,"players":Durak.players[tg],"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":"attacker","roles":Durak.roles,active_suit:Durak.active_suit};
+        await Game_game(w_m,this.map, Durak,this)
+	    return 0;}	
+    	
+	}
+if((fp.length===0 || tp.length===0)&&!dbl){
+	console.log('game game');await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, Durak,this);return 0;	 
+	}	
 
 
 let qk=(m_role==='defender')?filterDeffender223.call(this,Durak.players[tg]):false;
 	
 
 console.log(`qk:${qk}`);
-if(qk!==false){let a = Number(msg?.players);
-        let b = Number(msg?.pos);
-        let ps = Number(msg?.passes);
-		Durak.passes=ps;
-		Durak.cach[a].push(Durak.players[a][b]);
-    Durak.players[a][b] = null;
+if(qk!==false){
+Durak.passes=ps;
+Durak.cach[a].push(Durak.players[a][b]);
+Durak.players[a][b] = null;
 	
 let Mess={type:"set",
 players:tg,
@@ -38,7 +65,8 @@ setTimeout(() =>{m.send(JSON.stringify(Mess).toString())},300)
 	
 	
 }
-if(qk===false){await Game_game(msg,this.map, Durak,this);
+if(qk===false){
+await Game_game(msg,this.map, Durak,this);
 let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};
 await Game_game(w_m,this.map, Durak,this);		 
  };

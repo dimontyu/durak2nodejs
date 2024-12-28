@@ -6,7 +6,7 @@ import {suitsMapping2,A,passesMapping}from './static.js';
 import {Konduktor}from './konduktor.js';
 import {Rout}from './rout.js';
 import {Render}from './body_render.js';
-export const state={};
+export var state={};
 
 export class DurakGame extends LitElement{
 	    _pos0=null;//позиция юзера игры this.players[this._pos0]
@@ -82,12 +82,12 @@ if(this.players_count===2 && e){this._role.reverse()}
 //console.log(this.usernames)
 let data=JSON.stringify({"install":true,users:this.deck_id,user:this.id,usernames:this.usernames})
 window.postMessage(data,origin );
-
-this.b_ack= html`<img src=./img/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0][1]}.png alt="Card back" class="card_img" style="opacity: 0.5;" />`
+this.b_ack=this.b_ackb();
+/* this.b_ack(){return html`<img src=./img/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0][1]}.png alt="Card back" class="card_img" style="opacity: 0.5;" />`} */
 //console.log(this._role)
 //console.log(this._role[0],this._role[1],this._role[2],this._role[3])	
 	 }
-
+b_ackb(){return html`<img src=./img/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0][1]}.png alt="Card back" class="card_img" style="opacity: 0.5;" />`}
 
 Rout(e){
  Rout.call(this,e);  
@@ -107,6 +107,21 @@ async echo(e){ let message=JSON.parse(e.data) ;
 ((message.type==="set")&&(Number(message.taks)===1))?this.Rout(message):null;//событие взял или покрыл
 ((message.type==="set")&&(Number(message.taks)===0))?this.Rout(message):null;
 (message.type==="round-taks")?this.Rout(message):null;
+((message.players_count))?[this.name=state.r.name,
+        
+        this.players_count = message.players_count,
+        this.deck = message.deck,
+        this.active_suit = message.active_suit,
+        this.attacker = message.attacker,
+        this.defender = message.defender,
+        this.players = message.players,
+        this.suits =message.suits,
+        this.ranks =message.ranks,
+        this.passes =message.passes,
+        this.target =message.target,
+        this.id =message.id ,
+		this.static_role=message.pl_roles,
+		this.connect(),this.requestUpdate()]:null;
 }
 
 

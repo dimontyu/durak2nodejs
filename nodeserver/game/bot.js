@@ -17,7 +17,7 @@ this.map=[this.client];
 this.init()[0];
 this.init()[1];
 this.client.on('message',(message)=>{this.Message(message,this.map,this.durak)});
-this.client.on('close', ()=>{ this.durak = null;this.konduktor=null;this.map=null});
+//this.client.on('close', ()=>{ this.durak = null;this.konduktor=null;this.map=null});
 this._myrole==='attacker'?this.start():null;
 	};
 clients(){console.log(this.durak)};

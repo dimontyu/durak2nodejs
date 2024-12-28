@@ -2,7 +2,7 @@
 
 
 
-module.exports = async function (msg, map, Durak,bot) {
+module.exports = async function (msg, map, Durak,bot,qp) {qp&&console.log(msg?.taks,msg?.role,msg?.players);
     if (!msg?.taks) {
         let a = Number(msg?.players);
         let b = Number(msg?.pos);
@@ -29,37 +29,41 @@ module.exports = async function (msg, map, Durak,bot) {
 
 
 async function update(a, b, ps, map, msg, Durak,bot) {
-	try{let game = Durak;
-    if(game.players[a]){
-    
+try {
+        let game = Durak;
 
+if (game.players[a]) {
 
     game.cach[a]?.push(game.players[a][b]);
-     game.players[a][b] = null;
-    bot?null:game.passes= ps;
-if(bot&&msg?.role==="defender"&&bot._myrole==='defender'){setTimeout(() =>{map[0].send(JSON.stringify(msg).toString())
-},300)}if(bot&&msg?.role==="attacker"&&bot._myrole==='attacker'){setTimeout(() =>{map[0].send(JSON.stringify(msg).toString())},300)
+    game.players[a][b] = null;
+    bot ? null : game.passes = ps;
+
+    if(bot&&msg?.role==="defender"&&bot._myrole==='defender'){setTimeout(() =>{map[0].send(JSON.stringify(msg).toString())}, 300)
+    }
+    if (bot && msg?.role === "attacker" && bot._myrole === 'attacker') {setTimeout(() => { map[0].send(JSON.stringify(msg).toString()) }, 300)
 	}
- else if(!bot){ game.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(JSON.stringify(msg).toString()) : null })}
+    else if(!bot){ game.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(JSON.stringify(msg).toString()) : null })}
 
 
 
-    return 0;}}
+    return 0;
+    }
+}
 	
-	 catch (error) {
+catch (error) {
   console.error(error);
   // Expected output: ReferenceError: nonExistentFunction is not defined
   // (Note: the exact output may be browser-dependent)
 }
 
-}
+};
 
 async function defender_main(t, ui, map, msg, Durak,bot) {
 
     
     let game = Durak;
 	game.passes=0;
-bot?bot.konduktor.clearAll():null;
+    bot?bot.konduktor.clearAll():null;
     for (let ie = 0; ie <= (game.players_count - 1); ie++) {
         game.players[ie] = await sortdek(game.players[ie])
         // for( let i of game.cach[ie]){game.players[ui].push(i)};
@@ -67,26 +71,27 @@ bot?bot.konduktor.clearAll():null;
         game.cach[ie] = [];
         let n6 = game.players[ie].length;
         let nn6 = 6 - n6;
-        if (nn6 > 0 && game.deck.length !== 0) {
-            await popdek(game.deck, game.players[ie], nn6)
-        }
+        if (nn6 > 0 && game.deck.length !== 0) {await popdek(game.deck, game.players[ie], nn6)}
         if (game.players[ie].length === 0) { game.players.splice[ie, 1] }
     }
-
+    let active_suit=msg?.active_suit?Durak.active_suit:null
     let gam_n = game; //console.log(result);
-    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': false });
-	if(bot){setTimeout(() =>{map[0].send(response.toString())},400);
-setTimeout(() =>{bot._myrole==='attacker'?bot.start():null},500)}
-  else  {gam_n.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(response.toString()) : null })}
+    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': false ,active_suit});
+	if(bot){
+		setTimeout(() =>{map[0].send(response.toString())},400);
+        setTimeout(() =>{bot._myrole==='attacker'?bot.start():null},500)
+	}
+    else  {gam_n.deck_id.forEach((client) => {
+		map.has(client) ? map.get(client).send(response.toString()) : null })
+	}
 
 }
 async function attaker_main(t, u, map, msg, Durak,bot) {
     
     let game = Durak;
 	game.passes=0;
-bot?bot.konduktor.clearAll():null;
-	
-    let num = game.players.length;
+    bot?bot.konduktor.clearAll():null;
+	let num = game.players.length;
     for (let ie = 0; ie <= num - 1; ie++) {
 
         game.players[ie] = await sortdek(game.players[ie]);
@@ -101,11 +106,17 @@ bot?bot.konduktor.clearAll():null;
         game.cach[ie] = [];
         if (game.players[ie].length === 0) { game.players.splice[ie,1] }
     }
+	let active_suit=msg?.active_suit?Durak.active_suit:null
     let gam_n = game; //console.log(result)
-    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true });
-	if(bot){setTimeout(() =>{map[0].send(response.toString());
-	bot._myrole==='defender'?bot.start():null },400)}
-  else { gam_n.deck_id.forEach((client) => { map.has(client) ? map.get(client).send(response.toString()) : null })}
+	msg?.active_suit?`active_suit:${Durak.active_suit}`:null
+    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true ,active_suit});
+	if(bot){
+		setTimeout(() =>{map[0].send(response.toString());
+	    bot._myrole==='defender'?bot.start():null },400)
+	}
+    else { gam_n.deck_id.forEach((client) => { 
+	    map.has(client) ? map.get(client).send(response.toString()) : null })
+	}
 }
 
 async function sortdek(gm) {

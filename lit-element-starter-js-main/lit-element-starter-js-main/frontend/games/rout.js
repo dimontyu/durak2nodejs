@@ -10,6 +10,8 @@ export function Rout(e){
 this.konduktor.clearAll();
         this.deck =e.deck ;
         this.players = e.players;
+		e.active_suit?this.active_suit=e.active_suit:null;
+		e.active_suit&&(this.b_ack=this.b_ackb());
         //this.static_role =e.roles 
         this.back =e.deck_back;
 		this.cash=e.cach;
