@@ -94,7 +94,7 @@ class DurakGame{
 	 async game_game(){
 		this.players =[];
 		this.deck_back=[];
-
+        this.cach=[[],[],[],[]];
 		this.A()
         
         this.create_deck()//собираем колоду
