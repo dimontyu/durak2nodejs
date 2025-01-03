@@ -53,7 +53,7 @@ async Message(message, map, durak,bt) {
 	if (type === 'set' && durak === null) {
 		console.log("GAME OVER");
 	}
-	console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
+	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
  };
  
  inits(){return [this.durak.attacker=this.durak.players[this.durak.roles.indexOf('attacker')],this.durak.defender=this.durak.players[this.durak.roles.indexOf('defender')]];}

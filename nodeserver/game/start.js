@@ -15,17 +15,19 @@ let dbl=Durak.deck.length===0;
 		let idx=Durak.roles.indexOf('defender');
 		let fps=()=>{return Durak.players[idx].filter(i=>i!==null)};
 		let fp=msg?Durak.players[a].filter(i=>i!==null):fps();
-dbl?console.log(fp):null
-dbl?console.log(tp):null	
+//dbl?console.log(fp):null
+//dbl?console.log(tp):null	
 let m_role=this._myrole;
 
 if((tp.length===0 || fp.length===0)&&dbl){
 	
-    if(fp.length===0){await gameover.call(this);console.log('game aover1');
+    if(fp.length===0){await gameover.call(this);//console.log('game aover1');
 	    let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit};
         await Game_game(w_m,this.map, Durak,this)
 	    return 0;}
-	else {gameover.call(this);console.log('game aover2'); let w_m={type:"set","taks":true,players:idx,id:Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,role:"defender","roles":Durak.roles,active_suit:Durak.active_suit};
+	else {gameover.call(this);
+	//console.log('game aover2');
+	let w_m={type:"set","taks":true,players:idx,id:Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,role:"defender","roles":Durak.roles,active_suit:Durak.active_suit};
 	await Game_game(w_m,this.map, Durak,this,'game aover2')
 	   return 0;}	
     	
@@ -35,13 +37,14 @@ if((tp.length===0 || fp.length===0)&&dbl){
         await Game_game(w_m,this.map, Durak,this)
 	    return 0;} */		
 if((fp.length===0 || tp.length===0)&&!dbl){
-	console.log('game game');await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, this.durak,this);return 0;	 
+	//console.log('game game');
+	await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, this.durak,this);return 0;	 
 	}
 else{			
 
 let k=(Durak.passes!==0)&&(m_role==='attacker')?filterAttach.call(this,Durak.players[tg]):filterAttach0.call(this,Durak.players[tg]);
 
-console.log(`k:${k}`);
+//console.log(`k:${k}`);
 
 if( k!==false && k!==100){
 	

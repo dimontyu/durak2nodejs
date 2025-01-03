@@ -2,7 +2,8 @@
 
 
 
-module.exports = async function (msg, map, Durak,bot,qp) {qp&&console.log(msg?.taks,msg?.role,msg?.players);
+module.exports = async function (msg, map, Durak,bot,qp) {
+	//qp&&console.log(msg?.taks,msg?.role,msg?.players);
     if (!msg?.taks) {
         let a = Number(msg?.players);
         let b = Number(msg?.pos);

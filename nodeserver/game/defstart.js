@@ -19,31 +19,32 @@ let fps=()=>{return Durak.players[idx].filter(i=>i!==null)};
 let fp=msg?Durak.players[a].filter(i=>i!==null):fps();
 let m_role=this._myrole;		
 //console.log(tp)
-dbl?console.log(fp):null
-dbl?console.log(tp):null
+//dbl?console.log(fp):null
+//dbl?console.log(tp):null
 	
 
 if((fp.length===1 || tp.length===0)&&dbl){
 	
-    if(fp.length===1){await gameover.call(this);console.log('game dover1');
+    if(fp.length===1){await gameover.call(this);//console.log('game dover1');
 	    let w_m={type:"set","taks":`${tg}`,"players":idx,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit};
         await Game_game(w_m,this.map, Durak,this)
 	    return 0;}
-	else{await gameover.call(this);console.log('game dover2');
+	else{await gameover.call(this);//console.log('game dover2');
 	    let w_m={type:"set","taks":true,"players":Durak.players[tg],"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":"attacker","roles":Durak.roles,active_suit:Durak.active_suit};
         await Game_game(w_m,this.map, Durak,this)
 	    return 0;}	
     	
 	}
 if((fp.length===0 || tp.length===0)&&!dbl){
-	console.log('game game');await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, Durak,this);return 0;	 
+	//console.log('game game');
+	await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, Durak,this);return 0;	 
 	}	
 
 
 let qk=(m_role==='defender')?filterDeffender223.call(this,Durak.players[tg]):false;
 	
 
-console.log(`qk:${qk}`);
+//console.log(`qk:${qk}`);
 if(qk!==false){
 Durak.passes=ps;
 Durak.cach[a].push(Durak.players[a][b]);
@@ -145,14 +146,15 @@ let result1=Dur_ple.findIndex((item,is)=>{if(item&&att){
 	//console.log(`a_cards:${a_cards}`);
 //console.log(`result1:${rw}`);
 	return rw}
-});
+})
 if(result1!==-1){return result1}
-}else
+else{
 																							
  //console.log(`a_cards:${a_cards}`);
-console.log(`result:${'result:false'}`);	
+//console.log(`result:${'result:false'}`);	
 return Boolean(A);	
-	
+}
+}else{return false}	
 };//np
 
 
