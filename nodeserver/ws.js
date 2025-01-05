@@ -103,7 +103,7 @@ server.on('upgrade', function (request, socket, head) {
 
 
 
-wss.on('connection', function (ws,request) {Connect.connect(WebSocket,wss,ws,map,request)})
+wss.on('connection', function (ws,request) {Connect.connect(ws,map,request)})
 
 
 
@@ -118,3 +118,6 @@ const IP = process.env.APP_IP;
 server.listen(PORT,IP, function () {
   console.log('Listening on'+PORT);
 });
+
+
+module.exports =WebSocket;

@@ -1,6 +1,7 @@
 'use strict'
 const Game_game = require('./du.game');
 const Bot=require('./bot');
+let ChatGame = require('../chat/chat');
 
 module.exports =class Player{
    constructor(durak,D_id,map,botj){
@@ -30,7 +31,7 @@ let i = 0;
 		}
 		client ? client.send(msg.toString()) : null;
 		if(!this.bt){
-		client?client.on('message',(message)=>{this.Message(message,map,durak,this.bt )}):null;
+		client?client.on('message',(message)=>{this.Message(item,client,message,map,durak,this.bt )}):null;
 		client?client.on('close', function () { durak = null;}):null;
 		}
 i += 1
@@ -38,11 +39,18 @@ i += 1
     }
 return	[this.bt?this.bot.clnt=Client:null];
 };
-async Message(message, map, durak,bt) {
-	this.inits()[0];this.inits()[1];
+async Message(userId,ws,message, map, durak,bt) {
+	//this.inits()[0];this.inits()[1];
 	let MSG = JSON.parse(message);
-	(MSG?.res)?this.durak.roles=MSG.res:null;
+	(MSG?.res)?[this.durak.roles=MSG.res,this.inits()[0],this.inits()[1]]:null;
 	let type = MSG?.type;
+	switch (type) {
+        case 'chat':
+            ChatGame(ws,userId, MSG,map);
+            //ChatGame(wss, map, ws, WebSocket, userId, MSG);
+	break;}
+	
+	
 	
 	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
 	if (type === 'set' && durak !==null) {

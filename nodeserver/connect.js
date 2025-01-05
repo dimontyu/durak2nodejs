@@ -6,7 +6,7 @@ const ws_controller = require('./ws-router/ws.ws');
  const Game2=new Set();
  const Game3=new Set();
  const Game4=new Set();
-exports.connect = function (WebSocket, wss, ws, map, request) {
+exports.connect = function (ws, map, request) {
 	const userId = request.session.userId;
 	const { pathname } = parse(request.url);
 	var Game;
@@ -31,10 +31,15 @@ exports.connect = function (WebSocket, wss, ws, map, request) {
 	map.set(userId, ws);
 
 	ws.on('error', console.error);
+	let c=0;
+	function S(message){c+=1;
+		ws_controller.message(ws, message,userId, map, Game, Number(pathname[1]));
+		c<3?ws.prependOnceListener('message', S):null;
+	}
+	
 
-	ws.on('message', function (message) {//console.log(message);
-		ws_controller.message(ws, message, WebSocket, wss, userId, map, Game, Number(pathname[1]))
-	});
+	ws.prependOnceListener('message', S);
+	
 	ws.on('close', function () {
 		map.delete(userId);
 		switch (pathname) {

@@ -24,7 +24,7 @@ clients(){console.log(this.durak)};
 
 async Message(message, map, durak) {
 	
-	this.init()[0];this.init()[1];
+	//this.init()[0];this.init()[1];
 	let MSG = JSON.parse(message);
 	//console.log(MSG);
 (MSG?.res)?[this.durak.roles=MSG.res,this.init()[0],this.init()[1],this._myrole=this.durak.roles[this.durak.target]]:null;

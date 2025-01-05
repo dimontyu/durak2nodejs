@@ -32,10 +32,7 @@ if((tp.length===0 || fp.length===0)&&dbl){
 	   return 0;}	
     	
 	}
-/* if(tp.length===1&&filterAttach.call(this,Durak.players[tg])){console.log('game aover3');await gameover.call(this);
-	    let w_m={type:"set","taks":true,"players":Number(msg?.players),"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":"defender","roles":Durak.roles,active_suit:Durak.active_suit};
-        await Game_game(w_m,this.map, Durak,this)
-	    return 0;} */		
+
 if((fp.length===0 || tp.length===0)&&!dbl){
 	//console.log('game game');
 	await Game_game(msg,this.map, Durak,this);let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,};await Game_game(w_m,this.map, this.durak,this);return 0;	 
