@@ -150,12 +150,10 @@ let result1=Dur_ple.findIndex((item,is)=>{if(item&&att){
 if(result1!==-1){return result1}
 else{
 																							
- //console.log(`a_cards:${a_cards}`);
-//console.log(`result:${'result:false'}`);	
 return Boolean(A);	
 }
 }else{return false}	
-};//np
+};
 
 
 

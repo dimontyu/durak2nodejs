@@ -47,7 +47,7 @@ async Message(userId,ws,message, map, durak,bt) {
 	switch (type) {
         case 'chat':
             ChatGame(ws,userId, MSG,map);
-            //ChatGame(wss, map, ws, WebSocket, userId, MSG);
+            
 	break;}
 	
 	
@@ -55,7 +55,7 @@ async Message(userId,ws,message, map, durak,bt) {
 	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
 	if (type === 'set' && durak !==null) {
 	await Game_game(MSG, map, durak,bt);
-	//this.bot?.clients();
+	
 	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
 	}
 	if (type === 'set' && durak === null) {
