@@ -36,7 +36,7 @@ const styles=function(ww,ps,p){
 
 	
 let a=positing[ps-1].top2;
-let a_trm=`translateY(${a})`;
+let a_trm=`translateY(${a})scale(1.15)`;
 let l_trm=ww;
 //let r_trm=`translateY(${a})`;
 let trm=(ww?.length>10)?l_trm:a_trm;
@@ -45,6 +45,7 @@ let Left=(ww?.length>10)?A[ps]:`${!ww?A[ps-1]:ww}`
 let s={transform:trm,
 left:Left,
 width: `57px`,
+margin:'2px'
 }	
 return s };	
 
@@ -84,7 +85,7 @@ return m.length!==0?m:[sw];
 this.passes=e.passes;
 
 
-let back_card=this.players[i].map((x,i)=>{if(x!==null) return html`<img class="card_img cards_number-6" style="top:0px;" src="./img/card-back.png">`;});
+let back_card=this.players[i].map((x,i)=>{if(x!==null) return html`<span class="card-back card_img cards_number-6" style="top:0px;"></span>`;});
 	
  
 let ps=e.passes;
@@ -110,16 +111,14 @@ let var_styl=styleMap(styles(ww,ps,p))
 
     let [sym, ra] = [x[0],x[1]];
     let suit = suitsMapping2[sym];
-    let img=`./img/${suit}${ra}.png`; 
-    return rr? html`<img class="card_img cards_number-6 " 
+    let img=`${suit}${ra}`; 
+    return rr? html`<span class="${img} card_img cards_number-6  " 
 	
 	style=${var_styl}
-	src =${img}
-	${animate(logoOptions(true))} >`: html`<img class="card_img cards_number-6 " 
+	${animate(logoOptions(true))} ></span>`: html`<span class="${img} card_img cards_number-6 " 
 	
 	style=${var_styl}
-	src =${img}
-	 >` }})
+	 ></span>` }})
 	
  return html`${back_card}${action_card}`
  }
@@ -140,15 +139,13 @@ let var_styl=styleMap(styles(ww,ps,p))
 	
     let [sym, ra] = [x[0],x[1]];
     let suit = suitsMapping2[sym];
-    let img=`./img/${suit}${ra}.png`; 
-   return rr? html`<img class="card_img cards_number-6 " 
+    let img=`${suit}${ra}`; 
+   return rr? html`<span class="${img} card_img cards_number-6 " 
 	${animate(logoOptions())}
 	style=${var_styl}
-	src =${img} 
-	>`:html`<img class="card_img cards_number-6 " 
+	></span>`:html`<span class="${img} card_img cards_number-6 " 
 	style=${var_styl}
-	src =${img} 
-	>` 
+	></span>` 
 	}})
 	
  

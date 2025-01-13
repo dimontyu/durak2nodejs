@@ -1,6 +1,8 @@
 import {suitsMapping2,A,passesMapping}from './static.js';
 
-export async function Defclick(e){if( e.target .style.top ==='-256px')return
+export async function Defclick(e){
+var client = window.innerWidth < "600";	
+	if( e.target.style.top==="-256px"||e.target.style.top==="-375px")return
 e.preventDefault
 
 let d= e.target.dataset;
@@ -14,9 +16,9 @@ if ( task===true){//если карту покрыл
 let broken_card=this.konduktor.broken_card();
 
    this.passes?passesMapping[this.passes](e.target):'';
-   e.target .style.top = '-256px';
+   e.target .style.top = !client?'-256px':'-375px';
    e.target.classList.remove(`cards_number-${6}-hover`);
-   e.target.style.transform = 'none';
+   e.target.style.transform = 'scale(1.1)';
  let wm3=this.konduktor.get_wm3(); 
 let wm4=this.konduktor.get_wm4();
 let pos_number=(this._pos2===Number(this._echo.players))||(this._pos3===Number(this._echo.players)); 

@@ -18,16 +18,10 @@ let k=Number(d.pos)
 let task= await matrix_attacker.call(this,j,k);
 if (task===true){
 	this.passes+=1;
-   //this.passes?passesMapping[this.passes](e.target):'';
-   e.target .style.left= po[this.passes-1].left;
-   e.target .style.top =!client? po[this.passes-1].top:"-375px";
-   e.target.classList.remove(`cards_number-${6}-hover`);
-   e.target.style.transform = 'scale(1.1)';
-   e.target.style.zIndex = -1;
-   //let ypy= e.target.getBoundingClientRect();
-   //console.log(ypy)
+	 handleEvent(e,po[this.passes-1],po[k]);
+  
    let u=this.players[j][k];
-//let lft=e.target.style.left;
+
 let lft=po[this.passes-1].left;
 
 this.konduktor.attach(u,lft);
@@ -57,3 +51,34 @@ let r_a=result.includes(true);
 
 if (r_a||p_i){return true;}//если все Ок промис труе отправляем сокет с данными
 else if(!r_a){return false};	}
+
+function handleEvent(event,po,ps){
+	let rer=event.target
+var client = window.innerWidth < "600";
+var itr=(ps?.leftn??300-po?.leftn??300)/6;
+//console.log(ps?.leftn);
+var ix;
+var lft=(px)=>{ix=px-(itr);/* console.log(ix) */;return (px-(itr))+'px'};
+
+const animation = event.target.animate(
+  [
+    //{ color: "#431236", offset: 0.233 },{ color: "red", offset: 0.444 },
+	{ transform: "scale(1.01)",top:"20px",left:ps?.left??'300px', },
+	{ transform: "scale(1.05) ",top:"-150px",left:lft(ps?.leftn??300), },
+	{ transform: "scale(1.07) ",top:"-180px",left:lft(ix), },
+	{ transform: "scale(1.08)",top:"-200px",left:lft(ix) },
+	{ transform: "scale(1.09) ",top:"-250px",left:lft(ix), },
+	{ transform: "scale(1.15) ",top:"-306px",left:lft(ix), },
+   {top:po.top,left:po.left},
+  ],{ duration: 280, fill: "none", iterations: 1, }
+);
+animation.id=`butt`;  
+  
+animation.onfinish = (ev) => { rer.style.left= po.left;
+   rer.style.top =!client? po.top:"-375px";
+   rer.classList.remove(`cards_number-${6}-hover`);
+   rer.style.transform = 'scale(1.15)';
+   rer.style.zIndex = -1;rer.style.margin='2px';}		
+
+
+};

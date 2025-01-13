@@ -1,6 +1,6 @@
  "use strict";
 import {BordCount} from"./chat/autch.js"
-import {DurakGame,state} from './games/main.js';
+import {DurakGame,state} from './games2/main.js';
 import {ws_player} from './chat/autch.js';
 import {MotionLit} from './logo/motion-l.js';
 var ws;
