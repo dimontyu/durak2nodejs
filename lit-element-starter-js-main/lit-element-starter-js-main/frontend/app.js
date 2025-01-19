@@ -96,7 +96,7 @@ let scale1 = 1;
 /* -- document.querySelector("#start_game3")*/			
 Buttons().forEach((i)=>{
 i.addEventListener("click", (event) => {
-set1=50-set1;
+set1=40-set1;
 scale1=3.5-scale1;	
 const animation = event.target.animate(
   [
@@ -104,7 +104,7 @@ const animation = event.target.animate(
 	{ transform: "scale(1.5) translate(10%,10%)",color: "#431236",offset: 0.133 },
 	{ transform: "scale(1.5) translate(20%,10%)",color: "red",offset: 0.333 },
 	{ transform: "scale(1.5) translate(30%,10%)",offset: 0.533 },
-    { transform: `scale(${scale1}) translate(${set1}%)`,},
+    { transform: `scale(${1.8}) translate(${set1}%)`,},
   ],{ duration: 3000, fill: "forwards",iterations: 1, }
 );
 animation.id=`buttons`;  
