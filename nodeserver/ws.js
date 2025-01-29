@@ -58,14 +58,15 @@ app.use(express.static('public'));
 app.use(sessionParser);
 app.post('/login', (req,res)=> autch.login(req,res,map));
 app.delete('/logout',(req,res)=> autch.logout(req,res,map));
+app.delete('/nouser',(req,res)=> autch.logostorage(req,res));
 app.post('/lg', (req,res)=> autch.loginGET(req,res));
 app.post('/register',(req,res)=> register(req,res));
 
 
 var dev_db_url =process.env.MONGODB_URI;
 var LmongoDB = 'mongodb://localhost:27017/durak';
-var mongoDB = dev_db_url??LmongoDB;//dev_db_url
-//var mongoDB = 'mongodb://localhost:27017/' 
+//var mongoDB = dev_db_url??LmongoDB;//dev_db_url
+var mongoDB =LmongoDB  
 mongoose.connect(mongoDB, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }).catch(error => handleError(error));
 mongoose.Promise = global.Promise;
 

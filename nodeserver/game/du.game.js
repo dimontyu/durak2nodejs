@@ -4,7 +4,7 @@
 
 module.exports = async function (msg, map, Durak,bot,qp) {
 	//qp&&console.log(msg?.taks,msg?.role,msg?.players);
-    if (!msg?.taks) {
+    if (!msg?.taks&&(msg?.type !== 'gameover')) {
         let a = Number(msg?.players);
         let b = Number(msg?.pos);
         let ps = Number(msg?.passes);
@@ -25,6 +25,9 @@ module.exports = async function (msg, map, Durak,bot,qp) {
 
 
     }
+	if (msg.type === 'gameover'){
+		return await nwround(msg, map, Durak);
+	}
 };
 
 
@@ -77,10 +80,10 @@ async function defender_main(t, ui, map, msg, Durak,bot) {
     }
     let active_suit=msg?.active_suit?Durak.active_suit:null
     let gam_n = game; //console.log(result);
-    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': false ,active_suit});
+    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': false ,active_suit,ix:msg?.ix});
 	if(bot){
 		setTimeout(() =>{map[0].send(response.toString())},400);
-        setTimeout(() =>{bot._myrole==='attacker'?bot.start():null},500)
+        setTimeout(() =>{bot._myrole==='attacker'&&!msg.ix?bot.start():null},500)
 	}
     else  {gam_n.deck_id.forEach((client) => {
 		map.has(client) ? map.get(client).send(response.toString()) : null })
@@ -110,10 +113,10 @@ async function attaker_main(t, u, map, msg, Durak,bot) {
 	let active_suit=msg?.active_suit?Durak.active_suit:null
     let gam_n = game; //console.log(result)
 	msg?.active_suit?`active_suit:${Durak.active_suit}`:null
-    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true ,active_suit});
+    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': true ,active_suit,ix:msg?.ix});
 	if(bot){
 		setTimeout(() =>{map[0].send(response.toString());
-	    bot._myrole==='defender'?bot.start():null },400)
+	    bot._myrole==='defender'&&!msg.ix?bot.start():null },400)
 	}
     else { gam_n.deck_id.forEach((client) => { 
 	    map.has(client) ? map.get(client).send(response.toString()) : null })
@@ -171,4 +174,22 @@ async function pop_dek(nn6, game, ie) {
 
         return 0;
     }
+}
+
+
+async function nwround( msg, map, Durak) {
+
+    
+    let game = Durak;
+	game.passes=0;
+	let bol=true;
+    msg.role==="attacker"?bol=false:null
+    let active_suit=Durak.active_suit
+    let gam_n = game; //console.log(result);
+    let response = JSON.stringify({ 'type': 'round-taks', 'deck': gam_n.deck, 'players': gam_n.players, 'roles': gam_n.roles, 'cach': gam_n.cach, 'deck_back': gam_n.deck_back, 'deck_id': gam_n.deck_id, 'bito': bol ,active_suit,ix:msg?.ix});
+	
+    gam_n.deck_id.forEach((client) => {
+		map.has(client) ? map.get(client).send(response.toString()) : null })
+	
+
 }

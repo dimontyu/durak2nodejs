@@ -78,6 +78,14 @@ var data=xx?JSON.parse(xx):undefined;
 var res=JSON.stringify({type:"connect-user","name":data?.name,token:data?.token,password:data?.password})
 data?window.setTimeout(()=>{frames.autch.postMessage(res,'*')},500):null;
 }if(!User&&!Nouser){let nackount=JSON.stringify({type:"connect-user",name:'GamerX',password:'000',token:"1S2ec3r4e5T"});localStorage.setItem('no-autch',nackount);window.setTimeout(()=>{frames.autch.postMessage(nackount,'*')},500)}
+if(User&&Nouser){
+	const iframe = document.querySelector("iframe");
+	const hosts=iframe.getAttribute('origin');
+	let j=JSON.parse(Nouser);let rsp={token:j.token}
+	let respce=await postData("DELETE",`${hosts}/nouser`,rsp);
+	if(respce){localStorage.removeItem(`${nouser}`)}
+	}
+
 }
 
 
@@ -91,7 +99,9 @@ pre(e){if( e.token){//console.log(e);
 let l_i=localStorage.getItem('Btn-pw1')
 let l_j=localStorage.getItem('no-autch')
 	
-let x=JSON.parse(l_i??l_j);x.token=e.token;e?.password?x.password=e?.password:null;let y=JSON.stringify(x);
+let x=JSON.parse(l_i??l_j);x.token=e.token;e?.password?x.password=e?.password:null;
+x.name=e.name;
+let y=JSON.stringify(x);
 
 //console.log(x)
 

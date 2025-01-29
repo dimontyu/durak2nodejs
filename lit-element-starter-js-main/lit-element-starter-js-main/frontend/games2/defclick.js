@@ -11,11 +11,12 @@ let k=Number(d.pos)
 
 
 let task= await matrix_defender.call(this,j,k);
+
 if ( task===true){//если карту покрыл
 
 
 
-let anime=await Animation.call(this,e.target,j,k,d)
+let anime=await Animation.call(this,e.target,j,k,d,this.passes)
  
 }
    
@@ -49,7 +50,7 @@ else {return false};
 
 
 
-async function Animation(ev,j,k,d){
+async function Animation(ev,j,k,d,passes){
 
 var client = window.innerWidth < "600";		
 	let animation=  ev.animate(
@@ -62,7 +63,7 @@ var client = window.innerWidth < "600";
 	{ transform: "scale(1.09) ",top : !client?'-220px':'-305px', },
 	{ transform: "scale(1.15) ",top : !client?'-256px':'-375px' },
    
-  ],{ duration: 300, fill: "none", iterations: 1, }
+  ],{ duration: 280, fill: "none", iterations: 1, }
 );
 
 animation.onfinish = (ee) => {
@@ -79,9 +80,12 @@ ev.style.left=(pos_number&&wm4.has(broken_card))?wm4.get(broken_card):wm3.get(br
   this.cash[j].push(this.players[j][k]);
   
   this.players[j].splice(k,1,null);
- 
-
-   this.w_m={type:"set","players":d.play,"pos":d.pos,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"passes":this.passes,broken_card:broken_card,"roles":this._role};
+let u=this.players[j].filter(i=>i!==null)  
+ if(u.length===0 &&this.deck.length===0 &&!this.bot){
+ this.w_m={type:'gameover',players:d.play,ix:true,"role":this._myrole};
+ }
+else{ 
+this.w_m={type:"set","players":d.play,"pos":d.pos,"id":this.id,"name":this.name,"deck_id":this.deck_id,"role":this._myrole,"passes":passes,broken_card:broken_card,"roles":this._role};}
    }		
 
 

@@ -22,13 +22,19 @@ let m_role=this._myrole;
 if((tp.length===0 || fp.length===0)&&dbl){
 	
     if(fp.length===0){await gameover.call(this);//console.log('game aover1');
-	    let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit};
-        await Game_game(w_m,this.map, Durak,this)
+	this.check[idx]=Number(this.check[idx])+1;
+	console.log(idx)
+	    let w_m={type:"set","taks":`${tg}`,"players":Durak.target,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit,ix:true};
+        await Game_game(w_m,this.map, Durak,this);this.checks();
+		console.log(this.check)
 	    return 0;}
-	else {gameover.call(this);
+	else {await gameover.call(this);
 	//console.log('game aover2');
-	let w_m={type:"set","taks":true,players:idx,id:Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,role:"defender","roles":Durak.roles,active_suit:Durak.active_suit};
-	await Game_game(w_m,this.map, Durak,this,'game aover2')
+	this.check[tg]=Number(this.check[tg])+1;
+	console.log(tg)
+	let w_m={type:"set","taks":true,players:idx,id:Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,role:"defender","roles":Durak.roles,active_suit:Durak.active_suit,ix:true};
+	await Game_game(w_m,this.map, Durak,this,'game aover2');this.checks();
+	console.log(this.check)
 	   return 0;}	
     	
 	}

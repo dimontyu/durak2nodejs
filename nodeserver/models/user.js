@@ -19,7 +19,9 @@ hash: String,
 name: String,	   
 email: String ,
 firstName: String,
-lastName: String 	   
+lastName: String,
+checked:{type: Map,
+of:[Number(0),Number(0)]} 	   
 });
 
 

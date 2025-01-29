@@ -19,7 +19,8 @@ module.exports = async function (req, res) {
         let join_key = uuid.v4()//will be needed later
         
         let hashed = createHash(user_password); 
-        let uzer = new User({ name: user_name, hash: hashed, token: join_key, frends_name: [], postmessage: [], email: '', session_id:'none' })
+        let uzer = new User({ name: user_name, hash: hashed, token: join_key, frends_name: [], postmessage: [], email: '', session_id:'none',checked:new Map() });
+		uzer.checked.set('bot',[0,0]);
         await uzer.save()
         let message = { 'type': 'autorisation', 'token': join_key, 'index': user_ind, 'name': user_name, session_id: req.session.userId }
  

@@ -6,6 +6,7 @@ import {suitsMapping2,A,passesMapping}from './static.js';
 import {Konduktor}from './konduktor.js';
 import {Rout}from './rout.js';
 import {Render}from './body_render.js';
+import {Renderix}from './ix.js';
 export var state={};
 
 export class DurakGame extends LitElement{
@@ -16,16 +17,18 @@ export class DurakGame extends LitElement{
 		_myrole='';            //роль юзера
 		_round=null;  //счетчик раундов
 	    _role=[]; 
+		
 	
     static properties = {   //Реактивные свойства 
       
 		_echo:{},//сообщения сервера
-		
+		_body:{}
       };
       static styles =vebcss;
 //static styles =vebcss4;	  
    constructor(){
         super()
+		this._body={};
         this.name=state.r.name;//id gemes
         this.ws=state.ws;//Websockets()
         this.players_count = state.r.players_count;
@@ -46,12 +49,11 @@ export class DurakGame extends LitElement{
         this.Rout=this.Rout.bind(this);
         this.cash=[[],[],[],[]];//карты в игре
         this.ws.onmessage=this.echo; //обработчик сообщений сервера 
-	    this._role=[];
-        this._myrole='null';
 		this._round=0;
 		this._a=[];
 	   this.connect();
-	  
+	  this.check=state.r.check??[0,0];
+	  this.bot=this.usernames.includes('BOT');
 	          
 }
 konduktor=new Konduktor();
@@ -104,6 +106,7 @@ set w_m(send){
 //обработчик сообщения сервера
 async echo(e){ let message=JSON.parse(e.data) ;
 (message.type==="set"&&!message.taks&&(message.id!==this.id))?this._echo=message:null;//все сообщения кроме взял карты
+/* (message.type==="set"&&!message.taks&&(message.id!==this.id))?this._echo=message:null;//все сообщения кроме взял карты */
 ((message.type==="set")&&(Number(message.taks)===1))?this.Rout(message):null;//событие взял или покрыл
 ((message.type==="set")&&(Number(message.taks)===0))?this.Rout(message):null;
 (message.type==="round-taks")?this.Rout(message):null;
@@ -141,16 +144,10 @@ return s;
 
 renderDeck(){return render_deck.call(this,null)};//render deck deck
 
-
-my_img;//сохранить чтобы не рендерить себя до конца раунда
-set foo(foo){this.my_img=foo;};
-get foo(){return this.my_img;}
-    
-
 // рендер for Render
- render(round){
+ render(){
 	
-	return Render.call(this,html,styleMap) ;
+	return this._echo?.ix?Renderix.call(this,html,styleMap):Render.call(this,html,styleMap)
 };
 
 

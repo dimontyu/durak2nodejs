@@ -1,19 +1,42 @@
 'use strict'
+const User = require('../models/user');
 const Game_game = require('./du.game');
 const Bot=require('./bot');
 let ChatGame = require('../chat/chat');
-
+const gameover=require('./gameover');
+const mongoplayer=require('./mongoplayer');
 module.exports =class Player{
    constructor(durak,D_id,map,botj){
+	   this.check=durak.check&&!botj?durak.check.reverse():durak.check??null;	
        this.players=D_id;	
        this.durak=durak;
        this.map=map;
        this.Message=this.Message.bind(this);
 	   this.bt=botj;
 	   this.bot=null;
-       this.init(this.durak,this.map);	
+       this.init(this.durak,this.map);
+	   //this.durak.players_count===2&&!this.bt?this.mongo(this.durak):null;
     }
+async mongo(Durak){try{
+	const item=0
+	if((Durak.usernames[item].substring(0, 6) === "GamerX")||(Durak.usernames[item+1].substring(0, 6) === "GamerX")){return};
+	if(this.check!==null){console.log(this.check);return}
+	
+	else{this.check=[];
+		let result1 = await User.findOne({ name:Durak.usernames[item]});
+	let result2 = await User.findOne({ name:Durak.usernames[item+1]});
+		result1.checked.set(Durak.usernames[item+1],[0,0]);await result1.save();
+		result2.checked.set(Durak.usernames[item],[0,0]);await result2.save();
+		[0,0].forEach(i=>{this.check.push(Number(i))});console.log(this.check)
+		
+		}
+}catch(error){console.error(error);}
+};
+
+
+	
 init(durak,map){
+this.durak.players_count===2&&!this.bt?this.mongo(this.durak):null;
 let Client=null	
 let i = 0;	
     for (const item of this.players) {
@@ -22,6 +45,7 @@ let i = 0;
 		durak.target = i;
 
 		let msg = JSON.stringify(durak);
+		
 		let client = map.get(item);
 		if(this.bt){
 		client?null:this.bot=new Bot(durak);
@@ -60,6 +84,15 @@ async Message(userId,ws,message, map, durak,bt) {
 	}
 	if (type === 'set' && durak === null) {
 		console.log("GAME OVER");
+	}
+	if (type === 'gameover' && durak !== null) {
+		let item=0;
+		if((durak.usernames[item].substring(0, 6) !== "GamerX")||(durak.usernames[item+1].substring(0, 6) !== "GamerX")&&durak.players_count===2&&!this.bt){await mongoplayer(Number(MSG.players),durak.usernames);};
+		
+		await gameover.call(this);
+		console.log("GAMEOVER");
+		MSG.active_suit=durak.active_suit
+		await Game_game(MSG, map, durak,bt);
 	}
 	//console.log('Att',this.durak.attacker,'\n','DF',this.durak.defender);
  };

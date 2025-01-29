@@ -1,6 +1,5 @@
 const ranks= ["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 const suits= ["Ch", "B", "K", "P"];
-
 const gameover=require('./gameover');
 const Game_game = require('./du.game');
 
@@ -26,12 +25,18 @@ let m_role=this._myrole;
 if((fp.length===1 || tp.length===0)&&dbl){
 	
     if(fp.length===1){await gameover.call(this);//console.log('game dover1');
-	    let w_m={type:"set","taks":`${tg}`,"players":idx,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit};
-        await Game_game(w_m,this.map, Durak,this)
+	this.check[idx]=Number(this.check[idx])+1;
+	console.log(idx)
+	    let w_m={type:"set","taks":`${tg}`,"players":idx,"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":m_role,"roles":Durak.roles,active_suit:Durak.active_suit,ix:true};
+        await Game_game(w_m,this.map, Durak,this);this.checks();
+		console.log(this.check)
 	    return 0;}
 	else{await gameover.call(this);//console.log('game dover2');
-	    let w_m={type:"set","taks":true,"players":Durak.players[tg],"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":"attacker","roles":Durak.roles,active_suit:Durak.active_suit};
-        await Game_game(w_m,this.map, Durak,this)
+	this.check[tg]=Number(this.check[tg])+1;
+	console.log(tg)
+	    let w_m={type:"set","taks":true,"players":Durak.players[tg],"id":Durak.id,"name":Durak.name,"deck_id":Durak.deck_id,"role":"attacker","roles":Durak.roles,active_suit:Durak.active_suit,ix:true};
+        await Game_game(w_m,this.map, Durak,this);this.checks()
+		console.log(this.check)
 	    return 0;}	
     	
 	}

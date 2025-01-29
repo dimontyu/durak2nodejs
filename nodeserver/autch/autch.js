@@ -29,6 +29,25 @@ if (request.body.token) { await User.deleteOne({ token: request.body.token }) }
   });
 };
 
+
+exports.logostorage=async function(request,response) {
+  
+
+  console.log('Destroying localstorage');
+ 
+   
+if (request.body.token) { await User.deleteOne({ token: request.body.token }) }
+//if (request.body.token&&!request.body.password){await User.deleteOne({token:request.body.token})}
+//if (!request.body.token&&request.body.password){let inuser=await User.findOne({name:request.body.name})
+//let inits=inuser?initHash(request.body.password,inuser):false;	
+//inits?await User.deleteOne({hash:inuser.hash}):null;
+//};
+    response.send({ result: 'OK', message: 'localstorage delete' });
+  
+};
+
+
+
 exports.loginGET= function(request,response) {
 
     if (!request.session?.userId) {

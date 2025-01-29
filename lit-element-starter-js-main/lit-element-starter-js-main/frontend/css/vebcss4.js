@@ -197,7 +197,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin:0 auto;
 	
 }
-.table_grid span {
+.g_g {
    
 	background-color:#0098ff94;
 	height:89px;
@@ -463,9 +463,31 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .card-back{ background-image: url(./img/card-back.png);}
-
-
-
+p.q{display: inline-block;
+    width: 100%;
+    font-size: 46px;
+	color:red;
+	margin: 12px;
+}
+.g_n {
+   
+	background-color:#0098ff94;
+	height:89px;
+	width:57px;
+	margin:5px;
+	
+}
+.modn {
+    background-color: rgba(158, 158, 158, 0.75);
+    max-width: 150px;
+    width: fit-content;
+    text-align: center;
+    border-radius: 15px;
+    padding: 4px;
+    color: red;
+    margin-left: -86px;
+    background-color: #9e9e9efa;
+}
 
 
 `

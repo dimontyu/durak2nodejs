@@ -3,14 +3,29 @@ const Game_game = require('./du.game');
 const Konduktor=require('./botstate');
 const astart=require('./start');
 const defstart=require('./defstart');
+const User = require('../models/user');
 class Bot{
     constructor(durak){
+	this.check=new Array();	
 	this.client={};
 	this.durak=durak;
 	this.map=[this.client,this];
 	this.clients.bind(this);
 	this._myrole=this.durak.roles[this.durak.target];
+    this.mongo(this.durak)
 	};
+	async mongo(Durak){try{let result = await User.findOne({ name:Durak.usernames[0]});
+	if(result){result.checked.get('bot').forEach(i=>{this.check.push(Number(i))});
+	console.log(this.check);}else{[0,0].forEach(i=>{this.check.push(Number(i))})
+	}}catch(error){console.error(error);}
+	}
+ checks(){let du=this.durak;
+	 let fci=(this.check).map(i=>{return i});
+	 User.findOne({ name:du.usernames[0]},(err,result)=>{
+ if (err){ return console.log(err)};		 
+	 if(result){result.checked.set('bot',fci); result.save();}}	).catch((error)=>console.log(error))
+		 };	
+	
 konduktor=new Konduktor();	
 set clnt(a){this.client=a;
 this.map=[this.client];
@@ -30,6 +45,7 @@ async Message(message, map, durak) {
 (MSG?.res)?[this.durak.roles=MSG.res,this.init()[0],this.init()[1],this._myrole=this.durak.roles[this.durak.target]]:null;
 
 	let type = MSG?.type;
+	if (type === 'start'){await this.start();}
 	if (type === 'set' && durak !==null&&MSG?.role==="defender"&&!MSG.taks) {
 	let players=MSG?.players;	
 	let pos=MSG?.pos;
