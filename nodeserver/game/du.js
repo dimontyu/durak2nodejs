@@ -18,7 +18,7 @@ module.exports = async function (userId, map, Game, path,botj) {
 	Game.delete(userId);
 	
 	let [G_m, D_id,check] = await sort(Game, yname.name,userId, path,botj);
-	path===2&&botj?check=y.checked.get('bot'):null
+	((path===2)&&botj&&(y?.checked))?check=y.checked.get('bot'):null;
 	exg.deck_id = D_id;
 	exg.usernames = G_m;
 	exg.cach = [[], [], [], []];

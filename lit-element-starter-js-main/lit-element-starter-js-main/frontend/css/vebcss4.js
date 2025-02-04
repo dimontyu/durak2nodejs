@@ -57,7 +57,7 @@ export const vebcss=css`
 .super {
     margin: 0;
     height: 100vh;
-   /*  background-image: url(/img/bcg-green.jpg); */
+   /*  background-image: url(/webp/bcg-green.webp); */
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -353,116 +353,116 @@ h1, h2, h3, h4, h5, h6, p {
     border-radius: 7px;  
 }
  .hearts6{
-    background-image: url(./img/hearts6.png);
+    background-image: url(./webp/hearts6.webp);
 }
  .hearts7{
-    background-image: url(./img/hearts7.png);
+    background-image: url(./webp/hearts7.webp);
 }
  .hearts8{
-    background-image: url(./img/hearts8.png);
+    background-image: url(./webp/hearts8.webp);
 }
  .hearts9{
-    background-image: url(./img/hearts9.png);
+    background-image: url(./webp/hearts9.webp);
 }
  .hearts10{
-    background-image: url(./img/hearts10.png);
+    background-image: url(./webp/hearts10.webp);
 }
 
  .heartsA{
-    background-image: url(./img/heartsA.png);
+    background-image: url(./webp/heartsA.webp);
 }
  .heartsK{
-    background-image: url(./img/heartsK.png);
+    background-image: url(./webp/heartsK.webp);
 }
  .heartsQ{
-    background-image: url(./img/heartsQ.png);
+    background-image: url(./webp/heartsQ.webp);
 }
  .heartsJ{
-    background-image: url(./img/heartsJ.png);
+    background-image: url(./webp/heartsJ.webp);
 }
  .clubs6{
-    background-image: url(./img/clubs6.png);
+    background-image: url(./webp/clubs6.webp);
 }
  .clubs7{
-    background-image: url(./img/clubs7.png);
+    background-image: url(./webp/clubs7.webp);
 }
  .clubs8{
-    background-image: url(./img/clubs8.png);
+    background-image: url(./webp/clubs8.webp);
 }
  .clubs9{
-    background-image: url(./img/clubs9.png);
+    background-image: url(./webp/clubs9.webp);
 }
  .clubs10{
-    background-image: url(./img/clubs10.png);
+    background-image: url(./webp/clubs10.webp);
 }
  .clubsA{
-    background-image: url(./img/clubsA.png);
+    background-image: url(./webp/clubsA.webp);
 }
  .clubsK{
-    background-image: url(./img/clubsK.png);
+    background-image: url(./webp/clubsK.webp);
 }
  .clubsQ{
-    background-image: url(./img/clubsQ.png);
+    background-image: url(./webp/clubsQ.webp);
 }
  .clubsJ{
-    background-image: url(./img/clubsJ.png);
+    background-image: url(./webp/clubsJ.webp);
 }
  .diamonds6{
-    background-image: url(./img/diamonds6.png);
+    background-image: url(./webp/diamonds6.webp);
 }
  .diamonds7{
-    background-image: url(./img/diamonds7.png);
+    background-image: url(./webp/diamonds7.webp);
 }
  .diamonds8{
-    background-image: url(./img/diamonds8.png);
+    background-image: url(./webp/diamonds8.webp);
 }
  .diamonds9{
-    background-image: url(./img/diamonds9.png);
+    background-image: url(./webp/diamonds9.webp);
 }
  .diamonds10{
-    background-image: url(./img/diamonds10.png);
+    background-image: url(./webp/diamonds10.webp);
 }
  .diamondsA{
-    background-image: url(./img/diamondsA.png);
+    background-image: url(./webp/diamondsA.webp);
 }
  .diamondsK{
-    background-image: url(./img/diamondsK.png);
+    background-image: url(./webp/diamondsK.webp);
 }
  .diamondsQ{
-    background-image: url(./img/diamondsQ.png);
+    background-image: url(./webp/diamondsQ.webp);
 }
  .diamondsJ{
-    background-image: url(./img/diamondsJ.png);
+    background-image: url(./webp/diamondsJ.webp);
 }
  .spades6{
-    background-image: url(./img/spades6.png);
+    background-image: url(./webp/spades6.webp);
 }
  .spades7{
-    background-image: url(./img/spades7.png);
+    background-image: url(./webp/spades7.webp);
 }
  .spades8{
-    background-image: url(./img/spades8.png);
+    background-image: url(./webp/spades8.webp);
 }
  .spades9{
-    background-image: url(./img/spades9.png);
+    background-image: url(./webp/spades9.webp);
 }
  .spades10{
-    background-image: url(./img/spades10.png);
+    background-image: url(./webp/spades10.webp);
 }
  .spadesA{
-    background-image: url(./img/spadesA.png);
+    background-image: url(./webp/spadesA.webp);
 }
  .spadesK{
-    background-image: url(./img/spadesK.png);
+    background-image: url(./webp/spadesK.webp);
 }
  .spadesQ{
-    background-image: url(./img/spadesQ.png);
+    background-image: url(./webp/spadesQ.webp);
 }
  .spadesJ{
-    background-image: url(./img/spadesJ.png);
+    background-image: url(./webp/spadesJ.webp);
 }
 
-.card-back{ background-image: url(./img/card-back.png);}
+.card-back{ background-image: url(./webp/card-back.webp);}
 p.q{display: inline-block;
     width: 100%;
     font-size: 46px;

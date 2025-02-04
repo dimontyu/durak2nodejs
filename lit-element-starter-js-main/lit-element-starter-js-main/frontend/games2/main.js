@@ -89,7 +89,7 @@ this.b_ack=this.b_ackb();
 //console.log(this._role)
 //console.log(this._role[0],this._role[1],this._role[2],this._role[3])	
 	 }
-b_ackb(){return html`<img src=./img/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0][1]}.png alt="Card back" class="card_img" style="opacity: 0.5;" />`}
+b_ackb(){return html`<img src=./webp/${suitsMapping2[this?.deck[0][0]]}${this?.deck[0][1]}.webp alt="Card back" class="card_img" style="opacity: 0.5;" />`}
 
 Rout(e){
  Rout.call(this,e);  

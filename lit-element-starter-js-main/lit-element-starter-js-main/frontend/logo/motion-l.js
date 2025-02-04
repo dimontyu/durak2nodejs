@@ -49,7 +49,7 @@ logotext(delayTime){return html`
           >`
       )}
 `;}
-delaycard(i,count){return `./img/${(simbol_card[count])+number_card[i]}.png`}
+delaycard(i,count){return `./webp/${(simbol_card[count])+number_card[i]}.webp`}
 /* ----------------------------------------------- */
 
 logocards(delayTime){ return html`
