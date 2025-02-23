@@ -13,7 +13,7 @@ export class MotionLit extends LitElement {
   };
   static styles = styles;
 
-logo = number_card;  
+//logo = number_card;  
 duration = 3000;
 controller = new AnimateController(this, {
     defaultOptions: {
@@ -28,27 +28,20 @@ controller = new AnimateController(this, {
   constructor() {
     super();
 	this.a=false;
-    this.addEventListener('click', () => {this.clickHandler(this.a),false});
-    this.letters = this.logo;
+    this.addEventListener('click',this.clickHandler,false);
+    this.letters =number_card;
 	this.count=0;
   }
+  disconnectedCallback() {
+  super.disconnectedCallback()
+ 
+  
+  
+}  
+  
+  
  /* ----------------------------------------------- */ 
-logotext(delayTime){return html`
-      ${this.letters?.map(
-        (letter, i) => html`<span
-            class=${i>5?"letter2":"letter"}
-            ${animate({
-              keyframeOptions: {
-                delay: i * delayTime,
-				id:`5877yt`,
-              },
-              in: fade,
-              out: flyBelow,
-            })}
-            >${letter}</span
-          >`
-      )}
-`;}
+
 delaycard(i,count){return `./webp/${(simbol_card[count])+number_card[i]}.webp`}
 /* ----------------------------------------------- */
 
@@ -79,7 +72,8 @@ logocards(delayTime){ return html`
     return this.logocards(delayTime)
   }
 /* ----------------------------------------------- */
-  clickHandler(a) {
+  clickHandler() {
+	  let a=this.a;
 	  //this.a=this.a?false:true;
 	  this.a=a===false;
     if (this.controller.isAnimating) {
@@ -97,8 +91,12 @@ logocards(delayTime){ return html`
 	  this.count>3?this.count=0:null;
 	let n=this.letters.length;
 
-   n?[this.count +=1,this.letters=[]]:[null,this.letters=this.logo] ;
+   n?[this.count +=1,this.letters=[]]:[null,this.letters=number_card] ;
   }
+  
+
+  
+  
 };
 /*end ----------------------------------------------- *//* ------------------------------class MotionLit */
 customElements.define('motion-lit', MotionLit);
