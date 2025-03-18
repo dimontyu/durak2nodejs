@@ -5,12 +5,15 @@ import {render_modalOne,render_modalTwo} from './renders.js';
 import {render_modalThree} from './chat_render.js';
 //import{connekt} from './websocket_connect.js';
 import{router_echo1} from './echo1_router.js'
-export const ws_player={};
+
  
   
 export class BordCount extends LitElement { 
+
  
+ //static ws_player(x){console.log(x);this.ws1=x};
  static properties = {
+	 ws:{type:Object},
 	 _UserNames:{type:Array},
 	 _User:{type:String},
 	 _Users:{type:Array},
@@ -25,6 +28,7 @@ export class BordCount extends LitElement {
 
   constructor() {
 	  super()
+	 
 	this.akkountVar=false;
 this.hideCompleted=false;	
 this._listItems=this.action;/*  Первый вызов  */
@@ -45,8 +49,8 @@ this.autch_message='hello world';
   
  _input_msg=""; 
  ackount={name:undefined,password:undefined,index:undefined,token:undefined};  
- ws;//порт/5
- ws1=ws_player?.ws;//порты игры
+ //ws;//порт/5
+ //ws1;//порты игры
 
 echo(e){
 //console.log(e.type)
@@ -108,9 +112,9 @@ let y=JSON.stringify(x);
 l_i?localStorage.setItem('Btn-pw1',y):localStorage.setItem('no-autch',y);}
 };
 
-async ws_plinstall(ev){//console.log(ev.data)
-this.ws1=ws_player?.ws??null;
-this.ws1?this.ws1.addEventListener("message",this.echo1):null;
+async ws_plinstall(ev){//console.log(this.ws)
+//this.ws1.ws=this.ws_player??null;
+this.ws?this.ws.addEventListener("message",this.echo1):null;
 
 	
 if(ev){let e=!(ev.data.result)?JSON.parse(ev.data):this.pre(ev.data);

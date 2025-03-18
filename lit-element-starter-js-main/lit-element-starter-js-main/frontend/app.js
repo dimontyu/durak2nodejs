@@ -1,8 +1,9 @@
  "use strict";
 import {BordCount} from"./chat/autch.js"
 import {DurakGame,state} from './games2/main.js';
-import {ws_player} from './chat/autch.js';
+//import autch from './chat/autch.js';
 import {MotionLit} from './logo/motion-l.js';
+var pf=document.querySelector('pink-floyd');
 var ws;
 
 var id_prosses;
@@ -11,7 +12,8 @@ var id_prosses;
 const Renderstart =async (response) => {
     let r=response;
 state.r=r;state.ws=ws;
-ws_player.ws=ws;
+pf.ws=ws;
+//BordCount.ws1=ws;console.log(BordCount.ws1)
 customElements.define('doom-arhitekt',DurakGame);
 
 
